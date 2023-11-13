@@ -1,0 +1,5 @@
+#!/bin/bash
+echo "fichier ?"
+read fichier
+touch $fichier"_old"
+ls 

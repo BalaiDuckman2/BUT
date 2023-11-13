@@ -1,0 +1,85 @@
+body{
+   font-family: arimo,arial,sans-serif ;
+   font-size:1em ;
+   color: #f6f8ca;
+   background-color: #f6f8ca;
+   padding: 0.8em;
+   position: relative;
+
+   
+}
+h1, h2{
+    font-family: Roboto,arial,sans-serif;
+}
+h1{
+    font-size: 4em;
+    color: #1f8a70;
+    background-image: url(images/ile-de-batz.jpg);
+    
+}
+footer{
+    font-size: 0.8em;
+}
+article ,header,footer{
+    background-color: #1f8a70;
+    margin: 0.5em;
+    padding: 0.8em;
+    border-radius:10px ;
+
+}
+nav{
+    background-color: #f6f8ca;
+
+}
+nav>ul{
+    display: inline-flex;
+
+    background-color: #f6f8ca;
+    color: #1f8a70;
+}
+li{
+    background-color: #1f8a70;
+    color: #f6f8ca;
+}
+img{
+    margin: 0.5em 1em;
+    
+}
+
+
+header>section{
+display: inline-flex;
+ 
+}
+#equatorial, #tropical{
+    width: 50%;
+   
+    
+
+}
+
+main > section {
+    display: inline-flex;
+    
+}
+
+article > section{
+    display: inline-flex;
+    justify-content: flex-end;
+    align-items: center;
+    flex-wrap: wrap;
+
+}
+footer{
+    text-align: center;
+}
+aside{
+    
+   
+    border: #1f8a70;
+}
+article > figure{
+    float: right;
+}
+
+

@@ -1,0 +1,21 @@
+TP4 : Redirections & Tubes
+
+STDIN = numéro 0 (clavier)
+STDOUT = numéro 1 (ecran)
+STDERR = numéro 2 (erreur)
+
+Pour rediriger le STDOUT d’une commande on utilise la syntaxe suivante :
+    commande [options] [paramètres] > fichier
+
+Pour rediriger le STDERR (qui est le canal n°2 ) d’une commande on utilise la syntaxe
+suivante :
+    ls -l zorglub 2> other_file
+
+faire les 2
+    cat /etc/passwd /etc/shadow > list_users 2> errors
+
+STDOUT + STDERR
+    cat /etc/passwd /etc/shadow > list_users 2>&1
+
+STDIN
+    commande [options] [paramètres] < fichier

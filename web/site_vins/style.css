@@ -1,0 +1,328 @@
+/* Styles CSS - Vins de Loire */
+
+
+/* Définition du corps de la page */
+body{
+    color: red;
+
+
+/* police Trebuchet MS, arial ou sans-serif */
+font-family: trebuchet-ms, arial, sans-serif;
+/* couleur du texte : d2691e */
+color: #d2691e;
+/* image de fond : couleur ea9e69, bouteille, sans répétition, fixe, en bas à droite */
+background-image: url(images/bouteille.png);
+background-color: #ea9e69 ;
+background-repeat:no-repeat;
+background-attachment: fixed;
+background-position: bottom right;
+
+}
+
+
+/* Définition en-tête, main et pied de page*/
+header, main, footer{
+/* largeur de 1024 pixels */
+width: 1024px;
+/* marge externe : 20 pixels en haut et en bas, auto à gauche et à droite */
+margin: 20px auto;
+/* marge interne : 10 pixels */
+padding: 10px;
+/* bordure : 4 pixels, inset et de couleur d2691e */
+border: 4px;
+border-color: #d2691e;
+/* fond de couleur fff */
+background-color: #fff;
+}
+
+
+
+
+/* Définition titre de niveau 1 */
+h1 {
+/* police Bauhaus 93, futura ou sans-serif, taille de la police de 2,5 em, interligne de 2,1 em et lettres en petites capitales */
+font-family: Bauhaus-93, futura, sans-serif;
+font-size:  2.5em; 
+line-height: 2.1em;
+text-transform: none;
+}
+/* premières lettres de chaque mot en majuscules */
+h1::first-line{
+    text-transform: capitalize;  
+}   
+h1{
+/* texte centré */
+text-align: center;
+/* espacement des mots : 20 pixels */
+word-spacing: 20px;
+/* image de fond : feuille_vigne */
+background-image: url(images/feuille_vigne.png);
+
+}
+
+/* Définition titre de niveau 2 */
+h2{
+/* style oblique */
+font-style: oblique;
+/* police grasse */
+font-weight: bold;
+/* police de couleur : d2691e */
+color: #d2691e ;
+/* alignement centré */
+text-align: center;
+/* espacement des lettres de 5 pixels */
+letter-spacing: 5px ;
+/* interligne de 1,8 em */
+line-height: 1.8em;
+/* couleur de fond : a52a2a */
+background-color: #a52a2a;
+/* marge externe : 20 pixels en haut et en bas, 10% à gauche et à droite */
+margin: 20px 10%;
+}
+
+
+/* Définition titres de niveau 3 et 4 et les termes définis au niveau du glossaire */
+h3, h4, #glossaire{
+/* police de couleur a52a2a */
+color: #a52a2a ;
+}
+
+/* Définition titre de niveau 3 */
+h3{
+
+/* style italique */
+font-style: italic;
+/* police grasse */
+font-weight: bold;
+/* alignement centré */
+text-align: center; 
+/* épaisseur de la bordure de 3 pixels */
+border-width: 3px;
+/* couleur de la bordure a52a2a */
+border-color: #a52a2a;
+/* style de la bordure : double */
+border-style: double;
+/* images de fond : mini_bouteille, sans répétition, à gauche */
+background-image: url(images/mini_bouteille.png);
+background-repeat: no-repeat;
+background-position: left;
+/* largeur de 600 pixels */
+width: 600px;
+/* hauteur de 40 pixels */
+height: 40px;
+/* marge externe de 20 pixels en haut et en bas, et automatique ailleurs */
+margin: 20px auto;
+/* marge interne égale à 12px en haut et 0 ailleurs */
+padding-top: 12px;
+}
+
+
+/* Définition titre de niveau 4 et les termes définis au niveau du glossaire */
+h4, #glossaire{
+/* décalage du texte de 20 pixels */
+text-indent: 20px ;
+/* bordure gauche style solid, épaisseur de 4 pixels */
+border-left-style: solid ;
+;
+/* bordure basse style solid, épaisseur de 2 pixels */
+border-bottom-style: solid ;
+
+/* marge externe de 20 pixels en haut et de 70% à droite */
+margin: 20px 70% 0 0;
+}
+
+/* Définition classe vinrouge */
+.vinrouge{
+/* fond de couleur ffaeb9 */
+background-color: #ffaeb9 ;
+}
+
+
+/* Définition classe vinblanc*/
+.vinblanc{
+/* fond de couleur ff9 */
+background-color: #ff9;
+}
+
+
+/* Définition du bloc de citation */
+blockquote{
+/* police de couleur blanche */
+color: #fff;
+/* fond de couleur d2691e */
+background-color: #d2691e ;
+/* texte centré */
+text-align: center;
+/* marges droite et gauche : 180 pixels et haute et basse : 2 pixels */
+margin: 2px 180px;
+/* marge interne droite et gauche de 40 pixels, haute et basse de 2 pixel */
+padding: 2px 40px;
+/* bordure gauche : 6 pixels, double et de couleur blanche */
+border-left: 6px ;
+border-left-style: double ;
+border-left-color: #fff ;
+/* bordure droite : 6 pixels, double et de couleur blanche */
+border-right: 6px ;
+border-right-style: double ;
+border-right-color: #fff ;
+
+}
+
+#explication{
+
+text-align: center;
+
+}
+
+/* Définition liste non ordonnée */
+#liste {
+/* liste à puce avec aspect disque ou puce_grappe positionnée à l'intérieur */
+list-style: disc inside url(images/puce_grappe.png);
+/* lettres en petites capitales */
+text-transform: capitalize;
+}
+
+
+/* Définition sous liste non ordonnée */
+#sousliste{
+/* liste à puce avec aspect carré, sans image et à l'intérieur */
+list-style: square inside none;
+/* lettres sans petites capitales */
+text-transform: none;
+}
+
+
+/* Définition liens normaux ou visités */
+a:link, a:visited{
+/* lien de couleur a52a2a */
+color: #a52a2a
+}
+
+
+/* Définition liens présents comme élément d'une liste */
+
+/* taille de la police de 1,2 em */
+
+/* interligne de 1,5 em */
+
+
+
+/* Définition paragraphe "appellation" */
+#appelation{
+
+/* texte centré */
+text-align: center;
+/* taille de la police 0,9 em */
+font-size: 0.9em;
+}
+
+
+/* Définition paragraphe "localisation" */
+#localisation{
+/* alinéa de 30 pixels */
+text-indent: 30px;
+/* texte justifié */
+text-align: justify;
+/* espacement des mots : -2 pixels */
+word-spacing: -2px;
+}
+
+/* Définition terme présent dans le glossaire */
+#glossaire{
+/* fond de couleur jaune */
+
+/* texte non souligné */
+
+
+
+/* marge interne 2 pixels à gauche et à droite */
+padding-left:2px ;
+padding-right: 2px;
+}
+
+
+/* Définition première lettre des termes du glossaire */
+#glossaire::first-line{
+/* police 1,5 em */
+font-size: 1.5em; }
+
+/* Définition liens survolés ou actifs et nom de fleuve mis en valeur */
+a:hover, a:active , #fleuve{
+/* police de couleur blanche */
+color: white ;
+/* fond de couleur a52a2a */
+background-color:#a52a2a ;
+}
+
+
+/* Définition images et videos */
+img, video{
+/****** changement de mode d'affichage : insertion de type bloc */
+display: block;
+/****** marge externe de 0 pixel en haut et en bas, automatique à gauche et à droite */
+margin: 0px auto;
+/* bordure 1px inset a52a2a */
+border: 1px inset #a52a2a ;
+
+}
+
+
+/* Définition image de la flêche */
+img, .fleche{
+/* pas de bordure */
+border: none;
+}
+
+
+/* Définition légendes et paragraphe de navigation */
+#lien{
+/* texte centré */
+text-align: center;
+}
+
+
+/* Définition tableau */
+table{
+/* largeur de 80% */
+width: 80%;
+/* marge externe de 20 pixels en haut et en bas, automatique à gauche et à droite */
+margin: 20px auto;
+/* bords des cellules séparés */ 
+border-collapse: separate;
+/* cellule vide masquée */
+empty-cells: hide;
+}
+
+
+
+/* Définition cellules */
+tr,td,th{
+/* bord d'une épaisseur de 1 pixel, trait continu et couleur a52a2a */
+border: 1px;
+border-style: solid;
+border-color: #a52a2a;
+/* texte centré */
+text-align: center;
+}
+
+
+/* Définition meilleure note */
+#meilleur{
+/* texte en gras */ 
+font-weight:bold ;
+}
+
+
+/* Définition cellules d'en-tête */
+th{
+/* police de couleur a52a2a */
+color: #a52a2a;
+/* couleur de fond ccc */
+background-color: #ccc;
+}
+
+figure{
+ float: left;
+
+
+}
