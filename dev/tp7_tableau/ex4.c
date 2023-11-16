@@ -46,7 +46,7 @@ void mjTab(int valeur){
     int resultat;
     while(valeur != 0)
     {
-        resultat = valeur
+        resultat = valeur;
         if(resultat==0){
             compteur = compteur+1;
         }
