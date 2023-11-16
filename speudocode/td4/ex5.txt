@@ -1,0 +1,4 @@
+debut 
+    tableDebut, tableFin,nombre : reel
+    mult : entier;
+    res : entier;

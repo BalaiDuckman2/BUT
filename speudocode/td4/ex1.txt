@@ -1,0 +1,23 @@
+programme puissance c'est
+debut
+    x, res : reel;
+    n, i : entier;
+    //saisie
+    ecrireEcran("valeur de x :");
+    lireClavier(x);
+    ecrireEcran("valeur de n :);
+    lireClavier(n);
+    tantque(n<0) faire
+        ecrireEcran("donner une valeur positive :");
+        lireClavier("n");
+    fintantque
+    //traitement
+    res := 1;
+    i := 1;
+    tantque (i<=n)faire
+        res := res * x;
+        i = i+1;
+    fintantque
+    //affichage
+    ecrireEcran(x,"^",n, "=",res);
+fin

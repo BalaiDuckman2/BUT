@@ -1,0 +1,24 @@
+
+programme moyenne c'est
+//constantes -->non
+procedure afficheMoy2Notes(entF note1: reel, entF note2 : reel);
+debut
+    //declaration des variables
+    reel : algo1, algo2;
+    //Saisie
+    ecrire("note algo1 : ");
+    lire(algo1);
+    ecrire("note algo2 :");
+    lire(algo2)
+    //traitement
+    afficheMoy2Notes(entE algo1, entE algo2);
+fin 
+procedure afficheMoy2Notes(entF note1: reel, entF note2 : reel) c'est
+debut
+    //declaration variables locales à la procedure
+    reel : moyenne;
+    //traitement
+    moyenne:=(note1+note2)/2
+    //affichage
+    ecrire("moyenne:",moyenne)
+fin

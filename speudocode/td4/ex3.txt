@@ -1,0 +1,15 @@
+constante entier MAX = 10
+debut
+    table : entier;
+    i : entier;
+    i := 1
+    resultat : entier
+    ecrireEcran("un entier");
+    lireClavier(table);
+    tantque(i != 10) alors
+        resultat = table *i
+        print(resultat,\n);
+    fintantque
+
+
+

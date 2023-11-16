@@ -1,0 +1,29 @@
+programme calcul c'est
+
+    procedure pSomme(entF borne1:entier, entF borne2: entier, sortF resultat:entier) c'est
+
+    debut 
+
+    fin
+
+    fonction fSomme(entF borne1 :entier,entF borne2:entier)delivre entier c'est
+    debut
+        resultat : entier;
+        i : entier;
+        i := borne1; resultat:=0;
+        tantque(i<=borne2)faire
+            resultat := resultat+1;
+            i :=i
+        fintantque
+        retourne resultat;
+    fin
+
+debut
+    res : entier;
+    //calcul de la somme entre 2 et 10 => appel de la procedure
+    pSomme(entE 2, entE 10, sortE res);
+    ecrireEcran(res);
+
+    //calcul de la somme entre 2 et 10 => appel de la fonction
+    res := fSomme(entE 2,entE 10);
+    ecrireEcran(res);

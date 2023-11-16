@@ -1,0 +1,11 @@
+
+
+
+debut
+//declaration des variable
+nb1, nb2, nb3 entier;
+
+//saisie
+lireClavier
+
+//traitement

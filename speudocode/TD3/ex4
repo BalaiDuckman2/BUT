@@ -1,0 +1,17 @@
+debut
+    //decla
+    nbgtotal, nbpersonnes, nbg ; entier;
+    //initialisation
+    nbpersonnes:= 0;
+    //traitement
+    ecrireEcran("entrez le nombre de gateaux total");
+    lireClavier(nbgtotal);
+    ecrireEcran("entrer le nombre de gateaux par personne");
+    lireClavier(nbg);
+    tant que(nbgtotal>=nbg) faire
+        nbpersonnes = nbpersonnes+1
+        nbgtotal := nbgtotal-nbg
+    fin tant que
+    ecrireEcran("nombre d'invité",nbpersonnes);
+    ecrireEcran("nombre de gateaux restant,nbgtotal);
+fin

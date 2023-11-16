@@ -1,0 +1,19 @@
+programme o49 c'est
+constante entier GRAND = 49;
+constante entier PETIT = 1;
+début
+    //décla
+    nb : entier;
+    lireClavier(nb);
+    //affichage
+    tant que (GRAND<nb && PETIT>nb) faire
+        si (GRAND<nb alors)
+            lireEcran("trop grand"); 
+
+        sinon 
+            lireEcran("trop petit");
+
+        lireClavier(nb);
+
+    finfaire
+        

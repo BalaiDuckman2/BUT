@@ -1,0 +1,10 @@
+fonction fMoyenne(entF note1:entier,entF note2:entier)c'est
+debut
+    moyenne : reel;
+    moyenne = (e1+e2)/2.0;
+
+    return moyenne
+
+fin 
+programme moyenne c'est
+debut

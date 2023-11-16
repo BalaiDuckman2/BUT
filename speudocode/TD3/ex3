@@ -1,0 +1,16 @@
+constante reel FIN = -1;
+debut
+    //decla
+    nb : reel;
+    somme : reel;
+    nombre : reel; 
+    //saisie
+    lireClavier(nb)
+    somme:=0;
+    nombre:=0;
+    //traitement
+    tant que nb /= FIN alors
+        somme = somme+1;        
+        nombre = nombre+nb;
+
+    

@@ -1,0 +1,33 @@
+//constante 
+constante reel FMIN := 150;
+constante reel FMAX := 600;
+constante reel TAUX := 0.1
+    
+    debut
+    
+    //decla variable
+    frais reel;
+    franchise reel;
+    laisseTomber boolean;
+    
+    //saisie
+    ecrireEcran("le montant de votre sinistre");
+    lireClavier(frais);
+    
+    //traitement
+    si franchise < FMIN alors 
+        franchise := FMIN
+        laisseTomber := faux
+    sinon si franchise > FMAX alors
+        franchise := FMAX;
+        laisseTomber := faux;   
+    finsi
+
+    //affichage 
+    si laisseTomber == vrai 
+        ecrireEcran ("laisseTomber),
+    sinon 
+        ecrireEcran("votre franchise est de" franchise);
+    finsi
+
+fin

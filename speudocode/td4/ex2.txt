@@ -1,0 +1,7 @@
+constante caractere CAR := '*'
+debut 
+    nbCol, nbCol, lig, cal : entier;
+    ecrireEcran("nbLig");
+    lireClavier(nbLig);
+    ecrireEcran("nbCol")
+    lireClavier(nbCol);

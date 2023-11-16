@@ -1,0 +1,37 @@
+programme rectangle c'est
+//constantes
+caractere : CAR = '*'
+procedure afficheRectangle(entF nbLig : int ,entF nbCol:int);
+procedure afficheLigne(entF nbCol:int);
+debut
+    //declaration des variables
+    int nombreLignes , nombreColonnes;
+    //Saisie des donnees
+    affiche("nb ligne:");
+    lire(nombreLignes);
+    affichage("nb colonnes);
+    lire(nombreColonnes);
+    //traitement
+    afficheRectangle(entE nombreLignes,entE nombreColonnes);
+fin
+//definiton des procedure
+procedure afficheLigne(entF nbCol: int)c'est
+    debut   
+        //declaration variables locale à la procedure
+        int i ;
+        //initialisation
+
+        //traitement
+        pour(i:=0; i<nbCol;pas de 1)faire
+        affiche(CAR); //sans saut de ligne
+        pas eu le temps d'ecrire
+
+procedure afficheRectangle(entF nbLig:int,entF nbCol:int)c'est
+debut   
+    //declaration des variables locale à la procedure
+    int i;
+    //traitement
+    pour(i:=o;i<nbLig; pas de 1) faire
+    afficheLigne
+    finpour
+fin
