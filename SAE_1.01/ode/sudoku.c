@@ -10,18 +10,18 @@ void chargerGrille(tGrille grille);
 void affichegrille(tGrille grille);
 void saisir(int *valeur);
 int possible(tGrille grille,int ligne,int colonne,int valeur);
+int grilleComplete(tGrille grille);
 
 int main(){
    tGrille grille1;
-   int numLigne, numColonne, valeur,oui,pos;
-   oui=0;
+   int numLigne, numColonne, valeur,fin,pos;
+   fin=0;
    chargerGrille(grille1);
-   //déclaration des variables
-   while (oui==0)
+   while (fin==0)
    {
       affichegrille(grille1);
-      saisir(&numLigne);
       saisir(&numColonne);
+      saisir(&numLigne);
       saisir(&valeur);
       pos=possible(grille1, numLigne, numColonne, valeur);
       if(pos==1){
@@ -29,23 +29,8 @@ int main(){
       }else{
          printf("valeur déjà mise\n");
       }
+      grilleComplete(grille1);
    }
-   
-   
-   
-
-   // saisie des données
-
-
-
-   // traitement des données
-
-
-
-   // affichage des résultats
-
-
-
    return EXIT_SUCCESS;
 }
 
@@ -123,11 +108,9 @@ int possible(tGrille grille,int ligne,int colonne,int valeur){
    int prise =1;
    for(int i =0; i<=8; i++){
       if(valeur == grille[ligne-1][i]){
-         printf("1\n");
          return 0;
       }
       if(valeur== grille[i][colonne-1]){
-         printf("2\n");
          return 0;
       }
    }
@@ -142,7 +125,7 @@ int possible(tGrille grille,int ligne,int colonne,int valeur){
                {
                   if (valeur==grille[i][j])
                   {
-                     printf("3\n");
+                     
                      return 0;
                   }else{
                      return 1;
@@ -153,4 +136,17 @@ int possible(tGrille grille,int ligne,int colonne,int valeur){
          
       }
    }   
+}
+int grilleComplete(tGrille grille){
+   for(int ligne=0; ligne<=8; ligne++)
+   {
+      for(int collone=0; collone <=8;collone++)
+      {
+         if(grille[ligne][collone]==0)
+         {
+            return 0;
+         }
+      }
+   }
+   return 1;
 }
