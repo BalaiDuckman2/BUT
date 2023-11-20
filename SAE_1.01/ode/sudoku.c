@@ -8,6 +8,8 @@ typedef int tGrille[TAILLE][TAILLE];
 
 void chargerGrille(tGrille grille);
 void affichegrille(tGrille grille);
+void saisir(int valeur);
+int possible(tGrille grille,int ligne,int colonne,int valeur);
 
 int main(){
    tGrille grille1;
@@ -16,7 +18,6 @@ int main(){
    //chargerGrille(grille1);
    //affichegrille(grille1);
    saisir(valeur);
-
 
    // saisie des données
 
@@ -80,13 +81,34 @@ void affichegrille(tGrille grille){
 
 }
 
-void saisir(int S){
-   char ch;
-   int x;
-   scanf("%s", ch);
-   if (sscanf(ch, "%d", &x)!=0){
-      printf("%d",x);
-   }else{
-      printf("échoué");
+void saisir(int valeur){
+   char ch[10];
+   int x=0;
+   int fin=0;
+   while(fin==0){
+      printf("saisir un chiffre:\n");
+      scanf("%s", ch);
+      if (sscanf(ch, "%d", &x)!=0)
+      {
+         if(x<1 || x>9){
+            printf("saisir un chiffre entre 1 et 9\n");
+         }
+         else{
+            valeur = x;
+            fin=1;
+         }
+      }
+      else{
+         printf("erreur ce n'est pas un chiffre \n");
+      }
    }
+}
+
+int possible(tGrille grille,int ligne,int colonne,int valeur){
+   for(int i; i<=8; i++){
+      if(valeur == grille[i][ligne]){
+
+      }
+   }
+
 }
