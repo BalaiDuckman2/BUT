@@ -12,10 +12,9 @@ int recherche_dicho_recursif(int valeur, tabEntiers tablo, int debut, int fin);
 int main(){
    //déclaration des variables
     tabEntiers  leTabloTrie = {13, 24, 35, 42, 53, 68, 77, 83, 88, 91} ;
-    printf("%d",recherche_dicho_recursif(42,  leTabloTrie,0,N));
+    printf("%d",recherche_dicho_recursif(91,  leTabloTrie,0,N-1));
 
-   // saisie des données
-
+   // saisie des donnée
 
 
    // traitement des données
@@ -33,12 +32,13 @@ int main(){
 
 
 int recherche_dicho_iteratif(int valeur,  tabEntiers tablo){
-    int max = N;
+    int max = N-1;
     int min = 0;
     int i;
+    i = (max+min)/2;
     while (min < max && valeur != tablo[i])
     {
-        i = (max+min)/2;
+        
         if(valeur < tablo[i]){
             max = i-1; 
         }
@@ -46,7 +46,7 @@ int recherche_dicho_iteratif(int valeur,  tabEntiers tablo){
         if(valeur > tablo[i]){
             min = i+1;
         }
-              
+        i = (max+min)/2;     
     }
 
     if (valeur == tablo[i])
@@ -62,15 +62,15 @@ int recherche_dicho_iteratif(int valeur,  tabEntiers tablo){
 
 int recherche_dicho_recursif(int valeur, tabEntiers tablo, int debut, int fin){
     if (debut <= fin) {
-        int i = (debut + fin) / 2
+        int i = (debut + fin) / 2;
         if(tablo[i] == valeur) {
             return i;
         }
         if (tablo[i] > valeur) {
-            return recherche_dicho_recursif(valeur, tablo, debut, fin-1);
+            return recherche_dicho_recursif(valeur, tablo, debut, i-1);
         }
         if(tablo[i]< valeur){
-            return recherche_dicho_recursif(valeur, tablo, debut+1, fin);
+            return recherche_dicho_recursif(valeur, tablo, i+1, fin);
         }
     }   
 
