@@ -8,29 +8,29 @@ typedef int tGrille[TAILLE][TAILLE];
 
 void chargerGrille(tGrille grille);
 void affichegrille(tGrille grille);
-void saisir(int valeur);
+void saisir(int *valeur);
 int possible(tGrille grille,int ligne,int colonne,int valeur);
+int grilleComplete(tGrille grille);
 
 int main(){
    tGrille grille1;
-   int numLigne, numColonne, valeur;
-   //déclaration des variables
-   //chargerGrille(grille1);
-   //affichegrille(grille1);
-   saisir(valeur);
-
-   // saisie des données
-
-
-
-   // traitement des données
-
-
-
-   // affichage des résultats
-
-
-
+   int numLigne, numColonne, valeur,fin,pos;
+   fin=0;
+   chargerGrille(grille1);
+   while (fin==0)
+   {
+      affichegrille(grille1);
+      saisir(&numColonne);
+      saisir(&numLigne);
+      saisir(&valeur);
+      pos=possible(grille1, numLigne, numColonne, valeur);
+      if(pos==1){
+         grille1[numLigne-1][numColonne-1] = valeur;
+      }else{
+         printf("valeur déjà mise\n");
+      }
+      grilleComplete(grille1);
+   }
    return EXIT_SUCCESS;
 }
 
@@ -40,7 +40,7 @@ int main(){
 void chargerGrille(tGrille grille){
    char nomFichier[30];
    FILE * f;
-   printf("Nom du fichier ? ");
+   printf("Nom du fichier : ");
    scanf("%s", nomFichier);
    f = fopen(nomFichier, "rb");
    if (f==NULL)
@@ -81,7 +81,7 @@ void affichegrille(tGrille grille){
 
 }
 
-void saisir(int valeur){
+void saisir(int *valeur){
    char ch[10];
    int x=0;
    int fin=0;
@@ -94,7 +94,7 @@ void saisir(int valeur){
             printf("saisir un chiffre entre 1 et 9\n");
          }
          else{
-            valeur = x;
+            *valeur = x;
             fin=1;
          }
       }
@@ -105,10 +105,48 @@ void saisir(int valeur){
 }
 
 int possible(tGrille grille,int ligne,int colonne,int valeur){
-   for(int i; i<=8; i++){
-      if(valeur == grille[i][ligne]){
-
+   int prise =1;
+   for(int i =0; i<=8; i++){
+      if(valeur == grille[ligne-1][i]){
+         return 0;
+      }
+      if(valeur== grille[i][colonne-1]){
+         return 0;
       }
    }
-
+   for(int i=3; i<=9; i=i+3){
+      for (int j = 3; j < 9; j=j+3)
+      {  
+         if (ligne < i && colonne < j)
+         {
+            for (i < i-2 ; i=i-1;)
+            {
+               for (j < j-2; j=j-2;)
+               {
+                  if (valeur==grille[i][j])
+                  {
+                     
+                     return 0;
+                  }else{
+                     return 1;
+                  }
+               }
+            }
+         }
+         
+      }
+   }   
+}
+int grilleComplete(tGrille grille){
+   for(int ligne=0; ligne<=8; ligne++)
+   {
+      for(int collone=0; collone <=8;collone++)
+      {
+         if(grille[ligne][collone]==0)
+         {
+            return 0;
+         }
+      }
+   }
+   return 1;
 }
