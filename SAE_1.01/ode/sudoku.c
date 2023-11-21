@@ -1,36 +1,50 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
-#define TAILLE 9
+#include <stdbool.h>
 
 //déclaration des constantes
+const int TAILLE_FICHIER = 30;
+const int N = 3;
+const int DEBUT = 0;
+#define TAILLE 9
+
+//déclaration du type tGrille 
 typedef int tGrille[TAILLE][TAILLE];
 
 void chargerGrille(tGrille grille);
 void affichegrille(tGrille grille);
 void saisir(int *valeur);
-int possible(tGrille grille,int ligne,int colonne,int valeur);
-int grilleComplete(tGrille grille);
+bool possible(tGrille grille,int ligne,int colonne,int valeur);
+bool grilleComplete(tGrille grille);
 
 int main(){
    tGrille grille1;
-   int numLigne, numColonne, valeur,fin,pos;
-   fin=0;
+   int numLigne, numColonne, valeur;
+   
    chargerGrille(grille1);
-   while (fin==0)
+   while (grilleComplete(grille1)==false)
    {
       affichegrille(grille1);
+      printf("Choix de la colonne(1-9):\n");
       saisir(&numColonne);
+      printf("Choix de la ligne(1-9):\n");
       saisir(&numLigne);
-      saisir(&valeur);
-      pos=possible(grille1, numLigne, numColonne, valeur);
-      if(pos==1){
-         grille1[numLigne-1][numColonne-1] = valeur;
-      }else{
-         printf("valeur déjà mise\n");
+      if(grille1[numLigne-1][numColonne-1]!=0){
+         printf("IMPOSSIBLE, la case n'est pas libre.\n");
       }
-      grilleComplete(grille1);
+      else
+      {
+         printf("Valeur à insérer(1-9):\n");
+         saisir(&valeur);
+         if(possible(grille1, numLigne, numColonne, valeur)==true){
+            grille1[numLigne-1][numColonne-1] = valeur;
+         }else{
+            printf("valeur déjà mise\n");
+         }
+      }
    }
+   printf("Grille pleine, fin de partie");
    return EXIT_SUCCESS;
 }
 
@@ -38,7 +52,7 @@ int main(){
 
 
 void chargerGrille(tGrille grille){
-   char nomFichier[30];
+   char nomFichier[TAILLE_FICHIER];
    FILE * f;
    printf("Nom du fichier : ");
    scanf("%s", nomFichier);
@@ -59,9 +73,9 @@ void affichegrille(tGrille grille){
    printf("    1  2  3   4  5  6   7  8  9\n");
    printf("  +---------+---------+---------+");
 
-   for(int ligne=0; ligne<=8; ligne++){
+   for(int ligne=DEBUT; ligne<TAILLE; ligne++){
       printf("\n%d |",ligne+1);
-      for(int collone=0; collone <=8;collone++){
+      for(int collone=DEBUT; collone <TAILLE;collone++){
          if(grille[ligne][collone]==0){
             printf(" . ");
          }else{
@@ -83,19 +97,27 @@ void affichegrille(tGrille grille){
 
 void saisir(int *valeur){
    char ch[10];
-   int x=0;
+   float x=0;
+   int y=0;
    int fin=0;
    while(fin==0){
-      printf("saisir un chiffre:\n");
       scanf("%s", ch);
-      if (sscanf(ch, "%d", &x)!=0)
+      if (sscanf(ch, "%f", &x)!=0)
       {
-         if(x<1 || x>9){
+         if(x<1 || x>10){
             printf("saisir un chiffre entre 1 et 9\n");
          }
          else{
-            *valeur = x;
-            fin=1;
+            for(float i=1;i<10;i++)
+            {
+               if(x==i){
+                  *valeur = x;
+                  fin=1;
+               }
+            }
+            if(fin!=1){
+               printf("saisir un chiffre entre 1 et 9 sans virgule\n");
+            }
          }
       }
       else{
@@ -104,18 +126,17 @@ void saisir(int *valeur){
    }
 }
 
-int possible(tGrille grille,int ligne,int colonne,int valeur){
-   int prise =1;
-   for(int i =0; i<=8; i++){
+bool possible(tGrille grille,int ligne,int colonne,int valeur){
+   for(int i =DEBUT; i<=TAILLE; i++){
       if(valeur == grille[ligne-1][i]){
-         return 0;
+         return false;
       }
       if(valeur== grille[i][colonne-1]){
-         return 0;
+         return false;
       }
    }
-   for(int i=3; i<=9; i=i+3){
-      for (int j = 3; j < 9; j=j+3)
+   for(int i=N; i<=N*N; i=i+N){
+      for (int j = N; j < N*N; j=j+N)
       {  
          if (ligne < i && colonne < j)
          {
@@ -126,9 +147,9 @@ int possible(tGrille grille,int ligne,int colonne,int valeur){
                   if (valeur==grille[i][j])
                   {
                      
-                     return 0;
+                     return false;
                   }else{
-                     return 1;
+                     return true;
                   }
                }
             }
@@ -137,16 +158,16 @@ int possible(tGrille grille,int ligne,int colonne,int valeur){
       }
    }   
 }
-int grilleComplete(tGrille grille){
-   for(int ligne=0; ligne<=8; ligne++)
+bool grilleComplete(tGrille grille){
+   for(int ligne=DEBUT; ligne<TAILLE; ligne++)
    {
-      for(int collone=0; collone <=8;collone++)
+      for(int collone=DEBUT; collone <TAILLE;collone++)
       {
          if(grille[ligne][collone]==0)
          {
-            return 0;
+            return false;
          }
       }
    }
-   return 1;
+   return true;
 }
