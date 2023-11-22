@@ -128,33 +128,41 @@ bool possible(tGrille grille,int ligne,int colonne,int valeur){
    bool fin = true;
    int i;
    int j;
-   while(i<=TAILLE){
-      i=DEBUT;
-      if(valeur == grille[ligne-1][i] || grille[i][colonne-1]){
-         return false;
+   int recup;
+   i=DEBUT;
+   while(fin ==true && i < TAILLE){
+      
+      if(valeur == grille[ligne-1][i] || valeur == grille[i][colonne-1]){
+         fin = false;
       }
       i++;
    }
    if(fin==true){
       i=N;
       j=N;
-      while(fin==true && i>=N*N; ){
-         while(fin == true && j >= N*N)
+      while(fin==true && i<=N*N ){
+         while(fin == true && j <=N*N)
          {  
             if (ligne < i && colonne < j)
             {
-               while (fin ==true && i!=0)
+               recup=j;
+               while(fin ==true && i!=-1)
                {
-                  while (fin == true && j!=0)
+                  while(fin == true && j!=-1)
                   {
                      if (valeur==grille[i][j])
-                     {  
-                     fin = false;
+                     {    
+                        fin = false;
                      }
+                     
                      j=j-1;
                   }
+                  j=recup;
                   i=i-1;
+                  
                }
+               i=TAILLE;
+               j=TAILLE;
             }
             j=j+N;
          }
@@ -163,16 +171,22 @@ bool possible(tGrille grille,int ligne,int colonne,int valeur){
    }
    return fin;
 }
+
 bool grilleComplete(tGrille grille){
-   for(int ligne=DEBUT; ligne<TAILLE; ligne++)
+   bool fin = true;
+   int ligne=DEBUT;
+   int collone=DEBUT;
+   while(ligne<=TAILLE && fin == true)
    {
-      for(int collone=DEBUT; collone <TAILLE;collone++)
+      while(collone<=TAILLE && fin == true)
       {
          if(grille[ligne][collone]==0)
          {
             return false;
          }
+         collone++;
       }
+      ligne++;
    }
    return true;
 }
