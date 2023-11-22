@@ -128,46 +128,54 @@ bool possible(tGrille grille,int ligne,int colonne,int valeur){
    bool fin = true;
    int i;
    int j;
-   int recup;
+   int recupi;
+   int recupj;
+   bool finboucle = false;
+
    i=DEBUT;
    while(fin ==true && i < TAILLE){
       
       if(valeur == grille[ligne-1][i] || valeur == grille[i][colonne-1]){
+         
          fin = false;
       }
       i++;
    }
-   if(fin==true){
-      i=N;
-      j=N;
-      while(fin==true && i<=N*N ){
-         while(fin == true && j <=N*N)
-         {  
+   if(fin==true)
+   {
+      i=3;
+      while (finboucle==false && i<=9)
+      {
+         j = 3;
+         while (finboucle==false && j<=8)
+         {
             if (ligne < i && colonne < j)
             {
-               recup=j;
-               while(fin ==true && i!=-1)
+               recupi = i;
+               while(finboucle == false && i >= recupi-2)
                {
-                  while(fin == true && j!=-1)
+                  recupj = j;
+                  while (finboucle==false && j >= recupj-2)
                   {
-                     if (valeur==grille[i][j])
-                     {    
+                     if (valeur==grille[i-1][j-1])
+                     {
                         fin = false;
+                        finboucle =true;
                      }
-                     
-                     j=j-1;
+                        j=j-1;
+                     }
+                     j = recupj;
+                     i=i-1;
                   }
-                  j=recup;
-                  i=i-1;
-                  
-               }
-               i=TAILLE;
-               j=TAILLE;
+               
+               finboucle = true;
             }
-            j=j+N;
+            j=j+3;
          }
-         i=i+N;
-      }   
+         i=i+3;
+      }
+
+      
    }
    return fin;
 }
@@ -182,11 +190,11 @@ bool grilleComplete(tGrille grille){
       {
          if(grille[ligne][collone]==0)
          {
-            return false;
+            fin = false;
          }
          collone++;
       }
       ligne++;
    }
-   return true;
+   return fin;
 }
