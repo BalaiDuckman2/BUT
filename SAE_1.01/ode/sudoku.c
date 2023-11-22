@@ -69,7 +69,6 @@ void chargerGrille(tGrille grille){
 }   
 
 void affichegrille(tGrille grille){
-   int nombre =1;
    printf("    1  2  3   4  5  6   7  8  9\n");
    printf("  +---------+---------+---------+");
 
@@ -97,26 +96,25 @@ void affichegrille(tGrille grille){
 
 void saisir(int *valeur){
    char ch[10];
-   float x=0;
-   int y=0;
-   int fin=0;
-   while(fin==0){
+   float x;
+   int y;
+   bool fin=false;
+   while(fin==false){
       scanf("%s", ch);
       if (sscanf(ch, "%f", &x)!=0)
       {
          if(x<1 || x>10){
-            printf("saisir un chiffre entre 1 et 9\n");
+            printf("saisir un chiffre entre 1 et 9 :\n");
          }
          else{
-            for(float i=1;i<10;i++)
+            y=x;
+            if(x==y)
             {
-               if(x==i){
-                  *valeur = x;
-                  fin=1;
-               }
+               *valeur = x;
+               fin=true;
             }
-            if(fin!=1){
-               printf("saisir un chiffre entre 1 et 9 sans virgule\n");
+            else{
+               printf("saisir un chiffre entre 1 et 9 sans virgule :\n");
             }
          }
       }
@@ -127,36 +125,43 @@ void saisir(int *valeur){
 }
 
 bool possible(tGrille grille,int ligne,int colonne,int valeur){
-   for(int i =DEBUT; i<=TAILLE; i++){
-      if(valeur == grille[ligne-1][i]){
+   bool fin = true;
+   int i;
+   int j;
+   while(i<=TAILLE){
+      i=DEBUT;
+      if(valeur == grille[ligne-1][i] || grille[i][colonne-1]){
          return false;
       }
-      if(valeur== grille[i][colonne-1]){
-         return false;
-      }
+      i++;
    }
-   for(int i=N; i<=N*N; i=i+N){
-      for (int j = N; j < N*N; j=j+N)
-      {  
-         if (ligne < i && colonne < j)
-         {
-            for (i < i-2 ; i=i-1;)
+   if(fin==true){
+      i=N;
+      j=N;
+      while(fin==true && i>=N*N; ){
+         while(fin == true && j >= N*N)
+         {  
+            if (ligne < i && colonne < j)
             {
-               for (j < j-2; j=j-2;)
+               while (fin ==true && i!=0)
                {
-                  if (valeur==grille[i][j])
+                  while (fin == true && j!=0)
                   {
-                     
-                     return false;
-                  }else{
-                     return true;
+                     if (valeur==grille[i][j])
+                     {  
+                     fin = false;
+                     }
+                     j=j-1;
                   }
+                  i=i-1;
                }
             }
+            j=j+N;
          }
-         
-      }
-   }   
+         i=i+N;
+      }   
+   }
+   return fin;
 }
 bool grilleComplete(tGrille grille){
    for(int ligne=DEBUT; ligne<TAILLE; ligne++)
