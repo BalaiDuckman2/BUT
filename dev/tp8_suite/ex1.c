@@ -43,20 +43,21 @@ void maintienTrie(tabnoms t, int n){
     chaine20 conteneur;
     int i;
     int compteur;
-    
-    while(compteur!=5){
-        compteur = 0;
+    compteur = 0;
+
+    while(compteur!=N){
         
-        for(int i=n-1; i==1 ;i=i-1){
+        
+        for(int i=n-1; i>=1 ;i=i-1){
             if(strcmp(t[i],t[i-1])<0){
                 strcpy(conteneur,t[i]);
                 strcpy(t[i],t[i-1]);
                 strcpy(t[i-1],conteneur);
-                printf("oui");
 
                 
             }else{
                 compteur = compteur+1;
+                
             }
         }
     }

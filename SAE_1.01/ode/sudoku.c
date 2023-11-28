@@ -195,6 +195,7 @@ bool grilleComplete(tGrille grille){
          collone++;
       }
       ligne++;
+      collone=DEBUT;
    }
    return fin;
 }
