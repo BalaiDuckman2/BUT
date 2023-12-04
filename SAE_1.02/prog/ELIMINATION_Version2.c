@@ -220,14 +220,37 @@ bool grilleComplete(tGrille grille){
 
 
 void ajouterCandidat(tCase1 laCase, int val){
-
+   laCase.nbCandidats++;
+   laCase.candidats[laCase.nbCandidats++] = val;
 }
-void retirerCandidat(tCase1 laCase, int val){
 
+void retirerCandidat(tCase1 laCase, int val){
+   int i = 0;
+   int n = 0;
+   laCase.nbCandidats = laCase.nbCandidats-1;
+   while (i<= laCase.nbCandidats)
+   {
+      if (laCase.candidats[i]==val || n ==1)
+      {
+         laCase.candidats[i]=laCase.candidats[i+1];
+         n=1;
+      }
+      i++;
+   }
+   
 }
 bool estCandidat(tCase1 laCase, int val){
-
+   int i = 0;
+   bool fin = false;
+   while (i<=laCase.nbCandidats && finboucle == false)
+   {
+      if(val == laCase.candidats){
+         fin = true;
+      }
+      i++;
+   }
+   return fin;
 }
 int nbCandidats(tCase1 laCase){
-   
+   return laCase.nbCandidats;
 }
