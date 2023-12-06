@@ -30,14 +30,20 @@ void ajouterCandidat(tCase1 laCase, int val);
 void retirerCandidat(tCase1 laCase, int val);
 bool estCandidat(tCase1 laCase, int val);
 int nbCandidats(tCase1 laCase);
-void metcandidat(int val,tGrille tab);
+void metcandidat(tGrille tab);
 void singletonNu();
+void initialise(tGrille tab);
 
 int main(){
    tGrille grille1;
    int numLigne, numColonne, valeur;
    
    chargerGrille(grille1);
+   affichegrille(grille1);
+   initialise(grille1);
+   metcandidat(grille1);
+   printf("%d",grille1[2][2].nbCandidats);
+   
   
    return EXIT_SUCCESS;
 }
@@ -224,35 +230,86 @@ int nbCandidats(tCase1 laCase){
 }
 
 
-void metcandidat(int val,tGrille tab){
-    int j=0;
-    int i=0;
-    for (int i = 0; i < TAILLE; i++)
+void metcandidat(tGrille tab){
+    int collonne=0;
+    int ligne=0;
+    int x=N-1;
+    int y=N-1;
+    bool fin=false;
+
+    for (int ligne = 0; ligne < TAILLE; ligne++)
     {
-        for (int j = 0; j < TAILLE; j++)
+        for (int collonne = 0; collonne < TAILLE; collonne++)
         {
-            if(tab[i][j].valeur==0){
-                if(tab[i][j].valeur==0)
-                {
-                    for (int z = 0; z < TAILLE; z++)
-                    {
-                        if (tab[i][z].valeur!=0)
+            if(tab[ligne][collonne].valeur==0)
+            {
+               if(tab[ligne][collonne].valeur==0)
+               {
+                  for (int z = 0; z < TAILLE; z++)
+                  {
+                     if (tab[ligne][z].valeur!=0)
+                     {
+                        retirerCandidat(tab[ligne][collonne],tab[ligne][z].valeur);
+                     }
+                     if (tab[z][collonne].valeur!=0)
+                     {
+                        retirerCandidat(tab[ligne][collonne],tab[z][collonne].valeur);    
+                     }
+                  }
+                     
+               }
+               while (fin==false&&x<=8)
+               {
+                  y=N-1;
+                  while (fin==false&&y<=8)
+                  {
+                     if (ligne <= x && collonne <= y) {
+                        for (int i = x; i < x-2; i--)
                         {
-                            ajouterCandidat(tab[i][j],tab[i][z].valeur);
-                        }
-                        if (tab[z][i].valeur!=0)
-                        {
-                            ajouterCandidat(tab[i][j],tab[i][z].valeur);    
+                           for (int j = y; j < y-2; j--)
+                           {
+                              if (tab[x][y].valeur!=0)
+                              {
+                                 retirerCandidat(tab[ligne][collonne],tab[x][y].valeur);
+                              }
+                              
+                           }
+                           
                         }
                         
-                        
-                    }
-                    
-                }
+                     }
+                     y=y+N;
+                  }
+                  x=x+N;
+               }
+               
+            
             }
+         }
         
-        }
+      
     
     
     }
+}
+
+void initialise(tGrille tab){
+   for (int i = 0; i < TAILLE; i++)
+   {
+      for (int j = 0; j < TAILLE; j++)
+      {
+         if (tab[i][j].valeur==0)
+         {
+            for (int x = 1; x < 10; x++)
+            {
+               ajouterCandidat(tab[i][j],x);
+            }            
+         }
+         
+         
+         
+      }
+      
+   }
+   
 }
