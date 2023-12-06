@@ -40,9 +40,13 @@ int main(){
    
    chargerGrille(grille1);
    affichegrille(grille1);
-   initialise(grille1);
+   grille1[3][3].nbCandidats = 9;
    metcandidat(grille1);
-   printf("%d",grille1[2][2].nbCandidats);
+   if(grille1[1][2].candidats[9]==true){
+      printf("oui");
+   }else{
+      printf("non");
+   }
    
   
    return EXIT_SUCCESS;
@@ -213,7 +217,7 @@ void ajouterCandidat(tCase1 laCase, int val){
 }
 
 void retirerCandidat(tCase1 laCase, int val){
-   laCase.nbCandidats--;
+   laCase.nbCandidats=laCase.nbCandidats-1;
    laCase.candidats[val] = false;
 }
 bool estCandidat(tCase1 laCase, int val){
@@ -264,6 +268,7 @@ void metcandidat(tGrille tab){
                   while (fin==false&&y<=8)
                   {
                      if (ligne <= x && collonne <= y) {
+                        fin=true;
                         for (int i = x; i < x-2; i--)
                         {
                            for (int j = y; j < y-2; j--)
@@ -271,6 +276,7 @@ void metcandidat(tGrille tab){
                               if (tab[x][y].valeur!=0)
                               {
                                  retirerCandidat(tab[ligne][collonne],tab[x][y].valeur);
+                                 printf("3");
                               }
                               
                            }
