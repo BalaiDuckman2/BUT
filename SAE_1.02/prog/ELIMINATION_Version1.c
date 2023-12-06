@@ -12,9 +12,9 @@ const int DEBUT = 0;
 
 //déclaration du type tGrille 
 typedef struct {
-int valeur;
-bool candidats[TAILLE + 1];
-int nbCandidats;
+   int valeur;
+   int candidats[TAILLE];
+   int nbCandidats;
 } tCase1;
 
 typedef tCase1 tGrille[TAILLE][TAILLE];
@@ -30,8 +30,6 @@ void ajouterCandidat(tCase1 laCase, int val);
 void retirerCandidat(tCase1 laCase, int val);
 bool estCandidat(tCase1 laCase, int val);
 int nbCandidats(tCase1 laCase);
-void metcandidat(int val,tGrille tab);
-void singletonNu();
 
 int main(){
    tGrille grille1;
@@ -203,56 +201,36 @@ bool grilleComplete(tGrille grille){
 
 void ajouterCandidat(tCase1 laCase, int val){
    laCase.nbCandidats++;
-   laCase.candidats[val] = true;
+   laCase.candidats[laCase.nbCandidats++] = val;
 }
 
 void retirerCandidat(tCase1 laCase, int val){
-   laCase.nbCandidats--;
-   laCase.candidats[val] = false;
+   int i = 0;
+   int n = 0;
+   laCase.nbCandidats = laCase.nbCandidats-1;
+   while (i<= laCase.nbCandidats)
+   {
+      if (laCase.candidats[i]==val || n ==1)
+      {
+         laCase.candidats[i]=laCase.candidats[i+1];
+         n=1;
+      }
+      i++;
+   }
+   
 }
 bool estCandidat(tCase1 laCase, int val){
-    bool fin;
-    if(laCase.candidats[val]==true){
-        fin = true;
-    }else{
-        fin=false;
-    }
-    return fin;
+   int i = 0;
+   bool fin = false;
+   while (i<=laCase.nbCandidats && fin == false)
+   {
+      if(val == laCase.candidats){
+         fin = true;
+      }
+      i++;
+   }
+   return fin;
 }
 int nbCandidats(tCase1 laCase){
    return laCase.nbCandidats;
-}
-
-
-void metcandidat(int val,tGrille tab){
-    int j=0;
-    int i=0;
-    for (int i = 0; i < TAILLE; i++)
-    {
-        for (int j = 0; j < TAILLE; j++)
-        {
-            if(tab[i][j].valeur==0){
-                if(tab[i][j].valeur==0)
-                {
-                    for (int z = 0; z < TAILLE; z++)
-                    {
-                        if (tab[i][z].valeur!=0)
-                        {
-                            ajouterCandidat(tab[i][j],tab[i][z].valeur);
-                        }
-                        if (tab[z][i].valeur!=0)
-                        {
-                            ajouterCandidat(tab[i][j],tab[i][z].valeur);    
-                        }
-                        
-                        
-                    }
-                    
-                }
-            }
-        
-        }
-    
-    
-    }
 }
