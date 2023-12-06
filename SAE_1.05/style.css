@@ -19,21 +19,50 @@ h4{
     font-size: 1.5em;
 }
 
-main, header,footer,section,
-
-article, section{
-    background-color: #eceff4;
-    color: black;
-    margin: 40 75px 0;
-}
-
-main > section{
-    display: inline-block;
-}
-article > img{
-
-}
 
 section{
-    display: inline-block;
+    background-color: #eceff4;
+    color: black;
+    margin: 40px 75px 0 75px;
+
+}
+figure{
+    width: fit-content;
+}
+
+#acteur{
+    display: inline-flex;
+    
+}
+
+figcaption{
+    text-align: center;
+}
+
+section > header{
+    
+}
+
+div{
+    display: inline-flex;
+}
+
+#acteur + section{
+    display: inline-flex;
+    flex-wrap: wrap;
+}
+#acteur+section>article>figure{
+    background-color: #bcffca ;
+    padding: 10px;
+    border-style: solid ;
+    border-width: 1px;
+}
+
+#episode>article{
+    margin: 4px;
+    
+}
+
+#acteur+section{
+    float: left;
 }
