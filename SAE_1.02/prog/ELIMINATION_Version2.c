@@ -30,22 +30,27 @@
    void retirerCandidat(tCase1 laCase, int val);
    bool estCandidat(tCase1 laCase, int val);
    int nbCandidats(tCase1 laCase);
-   void singletonNu();
+   void singletonNu(tGrille tab, int *nbCase);
    void initialise(tGrille tab);
-
+   void affiche(tCase1 laCase);
+   void statistique(tGrille tab, int *nbCase);
+   
+   
+   
    int main(){
       tGrille grille1;
-      int numLigne, numColonne, valeur;
-      
+      int numLigne, numColonne, valeur,nbCase;
+      nbCase=0;
       chargerGrille(grille1);
       affichegrille(grille1);
       initialise(grille1);
-      for(int i=0;i<10;i++){
-         initialise(grille1);
-         printf("%d\n",nbCandidats(grille1[7][0]));
-         singletonNu(grille1);      
+      statistique(grille1,&nbCase);
+      while(nbCase!=0){
+         singletonNu(grille1,&nbCase);      
          affichegrille(grille1);
+      
       }
+      printf("%d",nbCase);
       return EXIT_SUCCESS;
    }
 
@@ -64,7 +69,7 @@
       } 
       else 
       {
-         for(int i; i<=TAILLE_TOUT;i++){
+         for(int i; i<TAILLE_TOUT;i++){
             fread(&grille[i/TAILLE][i%TAILLE].valeur, sizeof(int), 1, f);
             grille[i/TAILLE][i%TAILLE].nbCandidats = 0;
             for (int j = 0; j < TAILLE+1; j++) {
@@ -131,63 +136,47 @@
       }
    }
 
-bool possible(tGrille grille,int ligne,int colonne,int valeur){
-   bool fin = true;
-   int i;
-   int j;
-   int recupi;
-   int recupj;
-   bool finboucle = false;
+bool possible(tGrille grille, int ligne, int colonne, int valeur) {
+    bool fin = true;
+    int i, j, recupi, recupj;
+    bool finboucle = false;
 
-   i=DEBUT;
-   while(fin ==true && i < TAILLE){
-      
-      if(valeur == grille[ligne][i].valeur || valeur == grille[i][colonne].valeur){
-         
-         fin = false;
-      }
-      i++;
-   }
-   if(fin==true)
-   {
-      i=N;
-      while (finboucle==false && i<=8)
-      {
-         j = N;
-         while (finboucle==false && j<=8)
-         {
-            if (ligne <= i && colonne <= j)
-            {
-               recupi = i;
-               while(finboucle == false && i >= recupi-2)
-               {
-                  recupj = j;
-                  while (finboucle==false && j >= recupj-2)
-                  {
-                     if (valeur==grille[i-1][j-1].valeur)
-                     {
-                        fin = false;
-                        finboucle =true;
-                        
-                     }
-                        j=j-1;
-                     }
-                     j = recupj;
-                     i=i-1;
-                  }
-               
-               finboucle = true;
+    i = DEBUT;
+    while (fin == true && i < TAILLE) {
+        if (valeur == grille[ligne][i].valeur || valeur == grille[i][colonne].valeur) {
+            fin = false;
+        }
+        i++;
+    }
+    
+    if (fin == true) {
+        i = N;
+        while (finboucle == false && i <= TAILLE) {
+            j = N;
+            while (finboucle == false && j <= TAILLE) {
+                if (ligne < i && colonne < j) {
+                    recupi = i;
+                    while (finboucle == false && i >= recupi - 2) {
+                        recupj = j;
+                        while (finboucle == false && j >= recupj - 2) {
+                            if (valeur == grille[i - 1][j - 1].valeur) {
+                                fin = false;
+                                finboucle = true;
+                            }
+                            j = j - 1;
+                        }
+                        j = recupj;
+                        i = i - 1;
+                    }
+                    finboucle = true;
+                }
+                j = j + N;
             }
-            j=j+N;
-         }
-         i=i+N;
-      }
-
-      
-   }
-   return fin;
+            i = i + N;
+        }
+    }
+    return fin;
 }
-
    bool grilleComplete(tGrille grille){
       bool fin = true;
       int ligne=DEBUT;
@@ -247,6 +236,8 @@ bool possible(tGrille grille,int ligne,int colonne,int valeur){
                      tab[i][j].candidats[x]=true;
                      
 
+                  }else{
+                     tab[i][j].candidats[x]=false;
                   }
                }            
             }
@@ -259,24 +250,61 @@ bool possible(tGrille grille,int ligne,int colonne,int valeur){
       
 }
 
-void singletonNu(tGrille tab){
+void singletonNu(tGrille tab, int *nbCase){
+   int contient;
+   contient = *nbCase;
    for (int i = 0; i < TAILLE; i++)
    {
       for (int j = 0; j < TAILLE; j++)
       {
+         
+
          if (tab[i][j].valeur==0){
+            
 
             if (nbCandidats(tab[i][j])==1)
             {
                for(int x = 1; x<TAILLE+1;x++){
                   if (tab[i][j].candidats[x] == true)
                   {
+                     initialise(tab);
                      tab[i][j].valeur= x;
+                     contient--;
+                     *nbCase=contient;
                      
                   }
                }
             }
          }
+      }
+      
+   }
+   
+}
+
+void affiche(tCase1 laCase){
+   for (int i = 1; i < 10; i++)
+   {
+      printf("%d\n",laCase.candidats[i]);
+   }
+   
+}
+
+
+void statistique(tGrille tab, int *nbCase){
+   int contient;
+   contient = *nbCase;
+
+   for (int i = 0; i < TAILLE; i++)
+   {
+      for (int j = 0; j < TAILLE; j++)
+      {
+         if (tab[i][j].valeur==0)
+         {
+            contient++;
+            *nbCase=contient;
+         }
+         
       }
       
    }
