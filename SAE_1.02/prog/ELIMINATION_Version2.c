@@ -40,10 +40,12 @@
       chargerGrille(grille1);
       affichegrille(grille1);
       initialise(grille1);
-      singletonNu(grille1);      
-      affichegrille(grille1);
-
-   
+      for(int i=0;i<10;i++){
+         initialise(grille1);
+         printf("%d\n",nbCandidats(grille1[7][0]));
+         singletonNu(grille1);      
+         affichegrille(grille1);
+      }
       return EXIT_SUCCESS;
    }
 
@@ -129,63 +131,62 @@
       }
    }
 
-   bool possible(tGrille grille,int ligne,int colonne,int valeur){
-      bool fin = true;
-      int i;
-      int j;
-      int recupi;
-      int recupj;
-      bool finboucle = false;
+bool possible(tGrille grille,int ligne,int colonne,int valeur){
+   bool fin = true;
+   int i;
+   int j;
+   int recupi;
+   int recupj;
+   bool finboucle = false;
 
-      i=DEBUT;
-      while(fin ==true && i < TAILLE){
+   i=DEBUT;
+   while(fin ==true && i < TAILLE){
+      
+      if(valeur == grille[ligne][i].valeur || valeur == grille[i][colonne].valeur){
          
-         if(valeur == grille[ligne-1][i].valeur || valeur == grille[i][colonne-1].valeur){
-            
-            fin = false;
-         }
-         i++;
+         fin = false;
       }
-      if(fin==true)
-      {
-         i=N;
-         while (finboucle==false && i<=8)
-         {
-            j = N;
-            while (finboucle==false && j<=8)
-            {
-               if (ligne <= i && colonne <= j)
-               {
-                  recupi = i;
-                  while(finboucle == false && i >= recupi-2)
-                  {
-                     recupj = j;
-                     while (finboucle==false && j >= recupj-2)
-                     {
-                        if (valeur==grille[i-1][j-1].valeur)
-                        {
-                           fin = false;
-                           finboucle =true;
-                           
-                        }
-                           j=j-1;
-                        }
-                        j = recupj;
-                        i=i-1;
-                     }
-                  
-                  finboucle = true;
-               }
-               j=j+N;
-            }
-            i=i+N;
-         }
-
-
-         
-      }
-      return fin;
+      i++;
    }
+   if(fin==true)
+   {
+      i=N;
+      while (finboucle==false && i<=8)
+      {
+         j = N;
+         while (finboucle==false && j<=8)
+         {
+            if (ligne <= i && colonne <= j)
+            {
+               recupi = i;
+               while(finboucle == false && i >= recupi-2)
+               {
+                  recupj = j;
+                  while (finboucle==false && j >= recupj-2)
+                  {
+                     if (valeur==grille[i-1][j-1].valeur)
+                     {
+                        fin = false;
+                        finboucle =true;
+                        
+                     }
+                        j=j-1;
+                     }
+                     j = recupj;
+                     i=i-1;
+                  }
+               
+               finboucle = true;
+            }
+            j=j+N;
+         }
+         i=i+N;
+      }
+
+      
+   }
+   return fin;
+}
 
    bool grilleComplete(tGrille grille){
       bool fin = true;
@@ -238,11 +239,12 @@
          {
             if (tab[i][j].valeur==0)
             {
+               tab[i][j].nbCandidats=0;
                for (int x = 1; x < 10; x++)
                {
-                  if (possible(tab, i, j, x)) {
-                     tab[i][j].candidats[x] = true;
+                  if (possible(tab, i, j, x)==true) {
                      tab[i][j].nbCandidats++;
+                     tab[i][j].candidats[x]=true;
                      
 
                   }
@@ -262,15 +264,19 @@ void singletonNu(tGrille tab){
    {
       for (int j = 0; j < TAILLE; j++)
       {
-         if (tab[i][j].nbCandidats==1)
-         {
-            if (tab[i][j].candidats == true)
+         if (tab[i][j].valeur==0){
+
+            if (nbCandidats(tab[i][j])==1)
             {
-               tab[i][j].valeur= tab[i][j].ca;
+               for(int x = 1; x<TAILLE+1;x++){
+                  if (tab[i][j].candidats[x] == true)
+                  {
+                     tab[i][j].valeur= x;
+                     
+                  }
+               }
             }
-            
          }
-         
       }
       
    }
