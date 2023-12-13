@@ -40,9 +40,9 @@
       chargerGrille(grille1);
       affichegrille(grille1);
       initialise(grille1);
-      printf("%d",grille1[1][0].nbCandidats);
-      
-      
+      singletonNu(grille1);      
+      affichegrille(grille1);
+
    
       return EXIT_SUCCESS;
    }
@@ -255,4 +255,24 @@
          
       }
       
+}
+
+void singletonNu(tGrille tab){
+   for (int i = 0; i < TAILLE; i++)
+   {
+      for (int j = 0; j < TAILLE; j++)
+      {
+         if (tab[i][j].nbCandidats==1)
+         {
+            if (tab[i][j].candidats == true)
+            {
+               tab[i][j].valeur= tab[i][j].ca;
+            }
+            
+         }
+         
+      }
+      
+   }
+   
 }
