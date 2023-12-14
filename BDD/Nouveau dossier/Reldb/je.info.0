@@ -1,0 +1,14 @@
+2023-12-14 07:31:16.838 UTC INFO [/home/etuinfo/racorre/BUT-1/BDD/Nouveau dossier/Reldb] Start DB remove/truncate scan, id=1 dbId=22 dbName=relvar_141
+2023-12-14 07:31:16.838 UTC INFO [/home/etuinfo/racorre/BUT-1/BDD/Nouveau dossier/Reldb] End DB remove/truncate scan, id=1 scanned=2 dbId=22 dbName=relvar_141
+2023-12-14 07:31:31.107 UTC INFO [/home/etuinfo/racorre/BUT-1/BDD/Nouveau dossier/Reldb] Start DB remove/truncate scan, id=2 dbId=24 dbName=relvar_176
+2023-12-14 07:31:31.108 UTC INFO [/home/etuinfo/racorre/BUT-1/BDD/Nouveau dossier/Reldb] End DB remove/truncate scan, id=2 scanned=0 dbId=24 dbName=relvar_176
+2023-12-14 07:31:31.255 UTC INFO [/home/etuinfo/racorre/BUT-1/BDD/Nouveau dossier/Reldb] Start DB remove/truncate scan, id=3 dbId=26 dbName=relvar_200
+2023-12-14 07:31:31.255 UTC INFO [/home/etuinfo/racorre/BUT-1/BDD/Nouveau dossier/Reldb] End DB remove/truncate scan, id=3 scanned=0 dbId=26 dbName=relvar_200
+2023-12-14 07:31:31.455 UTC INFO [/home/etuinfo/racorre/BUT-1/BDD/Nouveau dossier/Reldb] Start DB remove/truncate scan, id=4 dbId=28 dbName=relvar_213
+2023-12-14 07:31:31.456 UTC INFO [/home/etuinfo/racorre/BUT-1/BDD/Nouveau dossier/Reldb] End DB remove/truncate scan, id=4 scanned=0 dbId=28 dbName=relvar_213
+2023-12-14 07:31:31.506 UTC INFO [/home/etuinfo/racorre/BUT-1/BDD/Nouveau dossier/Reldb] Start DB remove/truncate scan, id=5 dbId=25 dbName=relvar_181
+2023-12-14 07:31:31.506 UTC INFO [/home/etuinfo/racorre/BUT-1/BDD/Nouveau dossier/Reldb] End DB remove/truncate scan, id=5 scanned=0 dbId=25 dbName=relvar_181
+2023-12-14 07:31:31.526 UTC INFO [/home/etuinfo/racorre/BUT-1/BDD/Nouveau dossier/Reldb] Start DB remove/truncate scan, id=6 dbId=27 dbName=relvar_206
+2023-12-14 07:31:31.527 UTC INFO [/home/etuinfo/racorre/BUT-1/BDD/Nouveau dossier/Reldb] End DB remove/truncate scan, id=6 scanned=0 dbId=27 dbName=relvar_206
+2023-12-14 07:31:31.601 UTC INFO [/home/etuinfo/racorre/BUT-1/BDD/Nouveau dossier/Reldb] Start DB remove/truncate scan, id=7 dbId=29 dbName=relvar_218
+2023-12-14 07:31:31.601 UTC INFO [/home/etuinfo/racorre/BUT-1/BDD/Nouveau dossier/Reldb] End DB remove/truncate scan, id=7 scanned=0 dbId=29 dbName=relvar_218
