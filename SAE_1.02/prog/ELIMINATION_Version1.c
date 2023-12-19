@@ -33,8 +33,8 @@
    void singletonNu(tGrille tab);
    void initialise(tGrille tab);
    void affiche(tCase1 laCase);
-   
-   
+   void singleCache(tGrille tab);
+   int nbCandCase(tGrille grille,int ligne,int colonne,int valeur);
    
    
    int main(){
@@ -45,7 +45,7 @@
       affichegrille(grille1);
       initialise(grille1);
       for(int i=0; i<7;i++){
-         singletonNu(grille1);      
+         singleCache(grille1);      
          affichegrille(grille1);
       
       }
@@ -102,35 +102,7 @@
 
    }
 
-   void saisir(int *valeur){
-      char ch[10];
-      float x;
-      int y;
-      bool fin=false;
-      while(fin==false){
-         scanf("%s", ch);
-         if (sscanf(ch, "%f", &x)!=0)
-         {
-            if(x<1 || x>10){
-               printf("saisir un chiffre entre 1 et 9 :\n");
-            }
-            else{
-               y=x;
-               if(x==y)
-               {
-                  *valeur = x;
-                  fin=true;
-               }
-               else{
-                  printf("saisir un chiffre entre 1 et 9 sans virgule :\n");
-               }
-            }
-         }
-         else{
-            printf("erreur ce n'est pas un chiffre \n");
-         }
-      }
-   }
+
 
 bool possible(tGrille grille, int ligne, int colonne, int valeur) {
     bool fin = true;
@@ -173,27 +145,6 @@ bool possible(tGrille grille, int ligne, int colonne, int valeur) {
     }
     return fin;
 }
-   bool grilleComplete(tGrille grille){
-      bool fin = true;
-      int ligne=DEBUT;
-      int collone=DEBUT;
-      while(ligne<TAILLE && fin == true)
-      {
-         while(collone<TAILLE && fin == true)
-         {
-            if(grille[ligne][collone].valeur==0)
-            {
-               fin = false;
-            }
-            collone++;
-         }
-         ligne++;
-         collone=DEBUT;
-      }
-      return fin;
-   }
-
-
 
 
    void ajouterCandidat(tCase1 *laCase, int val){
@@ -298,6 +249,29 @@ void singletonNu(tGrille tab){
       }
       
    }
+   
+}
+
+void singleCache(tGrille tab){
+   for (int i = 0; i < TAILLE; i++)
+   {
+      for (int j = 0; j < TAILLE; j++)
+      {
+         if(tab[i][j].valeur==0)
+         {
+
+            for (int x = 0; x < TAILLE; x++)
+            {
+               if(nbCandCase(tab,i,j,x)==1){
+               initialise(tab);
+               tab[i][j].valeur= x; 
+               }
+            }
+         }
+      }
+      
+   }
+   
    
 }
 
