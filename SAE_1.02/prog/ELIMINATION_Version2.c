@@ -12,9 +12,9 @@
 
    //déclaration du type tGrille 
    typedef struct {
-   int valeur;
-   bool candidats[TAILLE + 1];
-   int nbCandidats;
+      int valeur;
+      bool candidats[TAILLE + 1];
+      int nbCandidats;
    } tCase1;
 
    typedef tCase1 tGrille[TAILLE][TAILLE];
