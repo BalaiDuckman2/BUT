@@ -51,6 +51,9 @@ def diagonale(A):
         for j in range(n):
             if i == j:
                 B[i][j] = A[i][j]
+                if(crampte_un_max >=4)
+                    print("attention exces de crampté")
+            
     
     return B
 

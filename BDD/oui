@@ -1,4 +1,6 @@
-eval gestion des orga :
-semaine du 6 novembre : saé 1.06
-semaine du 13 novembre : eval tp --> oral duo
-semaine du 20 novembre : test de connaisance 
+la classe formation contient les clées étrangères semestre et parcours
+semestre contient   unité d'enseignement
+unité d'enseignement contient compétence saé et ressource
+ressource et saé se partage leur nombre d'heure
+
+parcours contient td et td contient tp
