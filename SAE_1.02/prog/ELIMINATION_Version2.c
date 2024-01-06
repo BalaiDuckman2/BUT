@@ -20,7 +20,7 @@
    typedef tCase1 tGrille[TAILLE][TAILLE];
 
 
-   void chargerGrille(tGrille grille);
+   void chargerGrille(tGrille grille, char nomFichier[TAILLE_FICHIER]);
    void affichegrille(tGrille grille);
    void saisir(int *valeur);
    bool possible(tGrille grille,int ligne,int colonne,int valeur);
@@ -30,35 +30,43 @@
    void retirerCandidat(tCase1 laCase, int val);
    bool estCandidat(tCase1 laCase, int val);
    int nbCandidats(tCase1 laCase);
-   void singletonNu(tGrille tab, int *nbCase);
+   void singletonNu(tGrille tab);
    void initialise(tGrille tab);
-   void affiche(tCase1 laCase);
-   void statistique(tGrille tab, int *nbCase);
-   
-   
+   int possibleCaché(tGrille grille, int ligne, int colonne, int valeur);
+   void singletonCaché(tGrille tab);
+   int nbCaseVide(tGrille tab);
+   int nbCandidatsElimine(tGrille tab);
+   void statistique(tGrille grille,int nbCaseVideInitial,int nbCandidatsInitial,char nomFichier[TAILLE_FICHIER]);   
    
    int main(){
       tGrille grille1;
-      int numLigne, numColonne, valeur,nbCase;
-      nbCase=0;
-      chargerGrille(grille1);
+      int numLigne, numColonne, valeur,nbCaseInitial,nbCandidatsInitial;
+      char nomFic[TAILLE_FICHIER];
+      chargerGrille(grille1,nomFic);
+      nbCaseInitial=nbCaseVide(grille1);
+      nbCandidatsInitial=nbCandidatsElimine(grille1);
       affichegrille(grille1);
+
       initialise(grille1);
-      statistique(grille1,&nbCase);
-      while(nbCase!=0){
-         singletonNu(grille1,&nbCase);      
+      
+      while(nbCaseVide(grille1)!=0)
+      {
+         singletonNu(grille1);
+         singletonCaché(grille1);   
          affichegrille(grille1);
+         
       
       }
-      printf("%d",nbCase);
+      statistique(grille1,nbCaseInitial,nbCandidatsInitial,nomFic);
+      
       return EXIT_SUCCESS;
    }
 
 
 
 
-   void chargerGrille(tGrille grille){
-      char nomFichier[TAILLE_FICHIER];
+   void chargerGrille(tGrille grille, char nomFichier[TAILLE_FICHIER]){
+      
       FILE * f;
       printf("Nom du fichier : ");
       scanf("%s", nomFichier);
@@ -231,6 +239,7 @@ bool possible(tGrille grille, int ligne, int colonne, int valeur) {
                tab[i][j].nbCandidats=0;
                for (int x = 1; x < 10; x++)
                {
+                  
                   if (possible(tab, i, j, x)==true) {
                      tab[i][j].nbCandidats++;
                      tab[i][j].candidats[x]=true;
@@ -250,9 +259,8 @@ bool possible(tGrille grille, int ligne, int colonne, int valeur) {
       
 }
 
-void singletonNu(tGrille tab, int *nbCase){
-   int contient;
-   contient = *nbCase;
+void singletonNu(tGrille tab){
+   
    for (int i = 0; i < TAILLE; i++)
    {
       for (int j = 0; j < TAILLE; j++)
@@ -267,10 +275,10 @@ void singletonNu(tGrille tab, int *nbCase){
                for(int x = 1; x<TAILLE+1;x++){
                   if (tab[i][j].candidats[x] == true)
                   {
-                     initialise(tab);
+                     
                      tab[i][j].valeur= x;
-                     contient--;
-                     *nbCase=contient;
+                     
+                     initialise(tab);
                      
                   }
                }
@@ -282,31 +290,152 @@ void singletonNu(tGrille tab, int *nbCase){
    
 }
 
-void affiche(tCase1 laCase){
-   for (int i = 1; i < 10; i++)
+
+
+
+int possibleCaché(tGrille grille, int ligne, int colonne, int valeur) {
+    bool fin = true;
+    int i, j, recupi, recupj;
+    bool finboucle = false;
+    int compteur=0;
+
+
+    if (fin == true) {
+        i = N;
+        while (finboucle == false && i <= TAILLE) {
+            j = N;
+            while (finboucle == false && j <= TAILLE) {
+                if (ligne < i && colonne < j) {
+                    recupi = i;
+                    while (finboucle == false && i >= recupi - 2) {
+                        recupj = j;
+                        while (finboucle == false && j >= recupj - 2) {
+                           if (grille[i - 1][j - 1].valeur==0)
+                           {
+                           
+                              if (grille[i - 1][j - 1].candidats[valeur]==true) {
+                                 compteur=compteur+1;
+                              }
+                           }
+                            j = j - 1;
+                        }
+                        j = recupj;
+                        i = i - 1;
+                    }
+                    finboucle = true;
+                }
+                j = j + N;
+            }
+            i = i + N;
+        }
+    }
+    return compteur;
+}
+
+void singletonCaché(tGrille tab){
+   for (int i = 0; i < TAILLE; i++)
    {
-      printf("%d\n",laCase.candidats[i]);
+      for (int j = 0; j < TAILLE; j++)
+      {
+         
+
+         if (tab[i][j].valeur==0){
+            for (int x = 1; x < 10; x++)
+            {
+
+               if (tab[i][j].candidats[x]==true)
+                  
+                  
+               {
+                  if (possibleCaché(tab,i,j,x)==1)
+                  {
+                     
+                     tab[i][j].valeur=x;
+                     initialise(tab);
+                     x=10;
+                  }
+               }
+               
+               
+               
+            }
+            
+         }
+
+      }
+
    }
-   
+
 }
 
 
-void statistique(tGrille tab, int *nbCase){
-   int contient;
-   contient = *nbCase;
-
+int nbCaseVide(tGrille tab){
+   int totale=0;
    for (int i = 0; i < TAILLE; i++)
    {
       for (int j = 0; j < TAILLE; j++)
       {
          if (tab[i][j].valeur==0)
          {
-            contient++;
-            *nbCase=contient;
+            totale++;
          }
          
       }
       
    }
+   return totale;
    
+}
+int nbCandidatsElimine(tGrille tab){
+   int totale=0;
+   for (int i = 0; i < TAILLE; i++)
+      {
+         for (int j = 0; j < TAILLE; j++)
+         {
+            if (tab[i][j].valeur==0)
+            {
+               
+               for (int x = 1; x < 10; x++)
+               {
+                  
+                  if (possible(tab, i, j, x)==true) {
+                     totale++;
+                     
+
+                  }
+               }            
+            }
+            
+            
+            
+         }
+         
+      }
+      return totale;
+}
+void statistique(tGrille grille, int nbCaseVideInitial,int nbCandidatsInitial,char nomFichier[TAILLE_FICHIER]){
+   float taux,pourcentage;
+   int nbCaseVideFinal = nbCaseVide(grille);
+   int nbCandidatsFinal = nbCandidatsElimine(grille);
+   nbCaseVideFinal =nbCaseVideInitial-nbCaseVideFinal;
+   nbCandidatsFinal= nbCandidatsInitial-nbCandidatsFinal;
+
+   if (nbCandidatsFinal==0)
+   {
+      
+      pourcentage=0;
+   }else{
+      pourcentage=(nbCandidatsInitial/nbCandidatsFinal)*100;
+   }
+   if (nbCaseVideFinal==0 )
+   {
+      taux=0;
+   }else{
+      taux=(nbCaseVideInitial/nbCaseVideFinal)*100;
+   }
+   
+   
+   printf("\n\n***** Résultat pour %s ******\n\n",nomFichier);
+   printf("Nombre de cases remplies = %d sur %d  Taux de remplissage = %.2f\n\n",nbCaseVideFinal,nbCaseVideInitial,taux);
+   printf("Nombre de Candidats elimines = %d     Pourcentage d'elimination = %.2f\n\n",nbCandidatsFinal,pourcentage);
 }
