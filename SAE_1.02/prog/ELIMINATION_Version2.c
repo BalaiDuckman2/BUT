@@ -36,25 +36,28 @@
    void singletonCaché(tGrille tab);
    int nbCaseVide(tGrille tab);
    int nbCandidatsElimine(tGrille tab);
-   void statistique(tGrille grille,int nbCaseVideInitial,int nbCandidatsInitial,char nomFichier[TAILLE_FICHIER]);   
+   void statistique(tGrille grille, float nbCaseVideInitial,float nbCandidatsInitial,char nomFichier[TAILLE_FICHIER]);
    
    int main(){
       tGrille grille1;
+      int nbCase=0;
+      int nbCase2=-1;
       int numLigne, numColonne, valeur,nbCaseInitial,nbCandidatsInitial;
       char nomFic[TAILLE_FICHIER];
       chargerGrille(grille1,nomFic);
       nbCaseInitial=nbCaseVide(grille1);
       nbCandidatsInitial=nbCandidatsElimine(grille1);
       affichegrille(grille1);
-
+      
       initialise(grille1);
       
-      while(nbCaseVide(grille1)!=0)
+      while(nbCaseVide(grille1)!=0 && nbCase!=nbCase2)
       {
+         nbCase=nbCaseVide(grille1);
          singletonNu(grille1);
          singletonCaché(grille1);   
          affichegrille(grille1);
-         
+         nbCase2=nbCaseVide(grille1);
       
       }
       statistique(grille1,nbCaseInitial,nbCandidatsInitial,nomFic);
@@ -413,10 +416,10 @@ int nbCandidatsElimine(tGrille tab){
       }
       return totale;
 }
-void statistique(tGrille grille, int nbCaseVideInitial,int nbCandidatsInitial,char nomFichier[TAILLE_FICHIER]){
+void statistique(tGrille grille, float nbCaseVideInitial,float nbCandidatsInitial,char nomFichier[TAILLE_FICHIER]){
    float taux,pourcentage;
-   int nbCaseVideFinal = nbCaseVide(grille);
-   int nbCandidatsFinal = nbCandidatsElimine(grille);
+   float nbCaseVideFinal = nbCaseVide(grille);
+   float nbCandidatsFinal = nbCandidatsElimine(grille);
    nbCaseVideFinal =nbCaseVideInitial-nbCaseVideFinal;
    nbCandidatsFinal= nbCandidatsInitial-nbCandidatsFinal;
 
@@ -425,17 +428,22 @@ void statistique(tGrille grille, int nbCaseVideInitial,int nbCandidatsInitial,ch
       
       pourcentage=0;
    }else{
-      pourcentage=(nbCandidatsInitial/nbCandidatsFinal)*100;
+      pourcentage=(nbCandidatsFinal/nbCandidatsInitial)*100;
    }
    if (nbCaseVideFinal==0 )
    {
       taux=0;
    }else{
-      taux=(nbCaseVideInitial/nbCaseVideFinal)*100;
+      taux=(nbCaseVideFinal/nbCaseVideInitial)*100;
    }
    
    
    printf("\n\n***** Résultat pour %s ******\n\n",nomFichier);
-   printf("Nombre de cases remplies = %d sur %d  Taux de remplissage = %.2f\n\n",nbCaseVideFinal,nbCaseVideInitial,taux);
-   printf("Nombre de Candidats elimines = %d     Pourcentage d'elimination = %.2f\n\n",nbCandidatsFinal,pourcentage);
+   printf("Nombre de cases remplies = %.0f sur %.0f  Taux de remplissage = %.2f%%\n\n",nbCaseVideFinal,nbCaseVideInitial,taux);
+   printf("Nombre de Candidats elimines = %.0f     Pourcentage d'elimination = %.2f%%\n\n",nbCandidatsFinal,pourcentage);
+}
+
+
+void paireNue(tGrille grille){
+   
 }
