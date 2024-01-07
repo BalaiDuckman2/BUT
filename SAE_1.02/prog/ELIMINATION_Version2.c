@@ -37,7 +37,11 @@
    int nbCaseVide(tGrille tab);
    int nbCandidatsElimine(tGrille tab);
    void statistique(tGrille grille, float nbCaseVideInitial,float nbCandidatsInitial,char nomFichier[TAILLE_FICHIER]);
-   
+   void paireNue(tGrille grille);
+   void paireNueCaché(tGrille grille);
+   int cherchecandidat(tGrille grille, int i, int j,int nombre);
+
+
    int main(){
       tGrille grille1;
       int nbCase=0;
@@ -53,12 +57,28 @@
       
       while(nbCaseVide(grille1)!=0 && nbCase!=nbCase2)
       {
+         
          nbCase=nbCaseVide(grille1);
+           
          singletonNu(grille1);
-         singletonCaché(grille1);   
+         singletonCaché(grille1);
+         paireNueCaché(grille1);
+         singletonNu(grille1);
+         singletonCaché(grille1); 
+         paireNue(grille1);
+         singletonNu(grille1);
+         singletonCaché(grille1);
+         
+         
+             
+         
+         
+         
          affichegrille(grille1);
+         
+         
+         
          nbCase2=nbCaseVide(grille1);
-      
       }
       statistique(grille1,nbCaseInitial,nbCandidatsInitial,nomFic);
       
@@ -117,35 +137,7 @@
 
    }
 
-   void saisir(int *valeur){
-      char ch[10];
-      float x;
-      int y;
-      bool fin=false;
-      while(fin==false){
-         scanf("%s", ch);
-         if (sscanf(ch, "%f", &x)!=0)
-         {
-            if(x<1 || x>10){
-               printf("saisir un chiffre entre 1 et 9 :\n");
-            }
-            else{
-               y=x;
-               if(x==y)
-               {
-                  *valeur = x;
-                  fin=true;
-               }
-               else{
-                  printf("saisir un chiffre entre 1 et 9 sans virgule :\n");
-               }
-            }
-         }
-         else{
-            printf("erreur ce n'est pas un chiffre \n");
-         }
-      }
-   }
+
 
 bool possible(tGrille grille, int ligne, int colonne, int valeur) {
     bool fin = true;
@@ -188,25 +180,6 @@ bool possible(tGrille grille, int ligne, int colonne, int valeur) {
     }
     return fin;
 }
-   bool grilleComplete(tGrille grille){
-      bool fin = true;
-      int ligne=DEBUT;
-      int collone=DEBUT;
-      while(ligne<TAILLE && fin == true)
-      {
-         while(collone<TAILLE && fin == true)
-         {
-            if(grille[ligne][collone].valeur==0)
-            {
-               fin = false;
-            }
-            collone++;
-         }
-         ligne++;
-         collone=DEBUT;
-      }
-      return fin;
-   }
 
 
 
@@ -251,7 +224,8 @@ bool possible(tGrille grille, int ligne, int colonne, int valeur) {
                   }else{
                      tab[i][j].candidats[x]=false;
                   }
-               }            
+               }
+
             }
             
             
@@ -260,6 +234,7 @@ bool possible(tGrille grille, int ligne, int colonne, int valeur) {
          
       }
       
+
 }
 
 void singletonNu(tGrille tab){
@@ -445,5 +420,230 @@ void statistique(tGrille grille, float nbCaseVideInitial,float nbCandidatsInitia
 
 
 void paireNue(tGrille grille){
+   int coord1[2];
+   int coord2[2];
+   bool paire1[2];
+  
    
+   
+   
+   for (int i = 2; i <= 8; i=i+N)
+   {
+      for (int j = 2; j <= 8; j=j+N)
+      {
+         
+         for (int x = i; x > i-2; x--)
+         {
+            for (int y = j; y > j-2; y--)
+            {
+               
+               if (grille[x][y].valeur==0)
+               {
+                  
+                  if(grille[x][y].nbCandidats==2)
+                  {
+                     int valpaire=0;
+                     paire1[0]=0;
+                     paire1[1]=0;
+                     coord1[0]=0;
+                     coord1[1]=0;
+                     for (int k = 1; k < 10; k++)
+                     {
+                        
+                        if (grille[x][y].candidats[k]==true)
+                        {
+                           paire1[valpaire]=k;
+                           valpaire++;
+                           coord1[0]=x;
+                           coord1[1]=y;
+                        }
+                     }
+                     for (int m = x; m > i-2; m--)
+                     {
+                        for (int l = y; l > j-2; l--)
+                        {
+                           if (m!=x||l!=y)
+                           {
+                              if (grille[m][l].nbCandidats==2)
+                              {
+                                 coord2[0]=0;
+                                 coord2[1]=0;
+                                 
+                                 if (grille[m][l].candidats[paire1[0]]==true && grille[m][l].candidats[paire1[1]]==true)
+                                 {
+                                    coord2[0]=m;
+                                    coord2[1]=l;
+                                    
+                                    
+                                    for (int u = i; u > i-2; u--)
+                                    {
+                                       for (int p = j; p > j-2; p--)
+                                       {
+                                          
+                                          if (coord1[0]!=u||coord1[1]!=p)
+                                          {
+                                             if (coord2[0]!=u||coord2[1]!=p)
+                                             {
+                                                
+                                                grille[u][p].candidats[paire1[0]]=false;
+                                                grille[u][p].candidats[paire1[1]]=false;
+                                             }
+                                             
+                                          }
+                                          
+                                       }
+                                    }
+                                 }
+                                 
+                              }
+                           }
+                           
+                           
+                           
+                        }
+                     }
+                     
+                     }   
+                     
+                     
+                  }
+               }
+               
+               
+            }
+            
+         }
+         
+      }
+      
+   }
+
+int cherchecandidat(tGrille grille, int i, int j,int nombre){
+   int compteur=0;
+   for (int x = i; x > i-2; x--)
+   {
+      for (int y = j; y > j-2; y--)
+      {
+         if(grille[x][y].valeur==0){
+            
+               if (grille[x][y].candidats[nombre]==true)
+               {
+                  compteur++;
+                  
+                  
+               }
+               
+            
+            
+         }
+      }
+   }
+   return compteur;
 }
+   
+void paireNueCaché(tGrille grille){
+   int compteur=0;
+   bool nbCandidats[10];
+   
+   
+   for (int i = 2; i <= 8; i=i+N)
+   {
+      for (int j = 2; j <= 8; j=j+N)
+      {
+         for (int k = 1; k < 10; k++)
+         {
+            
+            nbCandidats[k]=false;
+         }
+         compteur=0;
+         for (int k = 1; k < 10; k++)
+         {
+            
+            if(cherchecandidat(grille,i,j,k)==2){
+               nbCandidats[k]=true;
+               compteur++;
+            }
+            
+         }
+         if(compteur>2)
+         {
+            for (int k = 1; k < 10; k++)
+            {
+               if (nbCandidats[k]==true)
+               {
+                  for (int p = 1; p < 10; p++)
+                  {
+                     if (nbCandidats[p]==true&&p!=k)
+                     {
+                        for (int x = i; x > i-2; x--)
+                        {
+                           for (int y = j; y > j-2; y--)
+                           {
+                              compteur=0;
+                              
+                              if (grille[x][y].candidats[k]==true&&grille[x][y].candidats[p]==true)
+                              {
+                                    compteur++;
+                                    
+                                    
+                              }
+
+                                 
+                              
+                              if (compteur==1)
+                              {
+                                 
+                                 for (int m = x; m > i-2; m--)
+                                 {
+                                    for (int l = y; l > j-2; l--)
+                                    {
+                                       compteur==0;
+                                       if (m!=x||l!=y)
+                                       {
+                                          
+                                          if (grille[m][l].candidats[k]==true&&grille[m][l].candidats[p]==true)
+                                          {
+                                             compteur++;
+                                          }
+
+                                             
+                                          if (compteur==1)
+                                          {
+                                             for (int b = 1; b < 10; b++)
+                                             {
+                                                if (b!=k&&b!=p)
+                                                {
+                                                   grille[x][y].candidats[b]=false;
+                                                   grille[m][l].candidats[b]=false;
+                                                }
+                                                
+                                             }
+                                             
+                                             
+                                          }
+                                          
+                                       }
+                                    }
+                              }
+                              
+                              
+                           }
+                     
+                        }
+                  
+                  }
+               
+         }
+                  
+      }
+
+         
+   }
+
+}
+}
+}  
+} 
+}
+
+

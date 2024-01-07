@@ -22,9 +22,7 @@
 
    void chargerGrille(tGrille grille, char nomFichier[TAILLE_FICHIER]);
    void affichegrille(tGrille grille);
-   void saisir(int *valeur);
    bool possible(tGrille grille,int ligne,int colonne,int valeur);
-   bool grilleComplete(tGrille grille);
 
    void ajouterCandidat(tCase1 *laCase, int val);
    void retirerCandidat(tCase1 *laCase, int val);
@@ -38,29 +36,44 @@
    int nbCaseVide(tGrille tab);
    int nbCandidatsElimine(tGrille tab);
    void statistique(tGrille grille, float nbCaseVideInitial,float nbCandidatsInitial,char nomFichier[TAILLE_FICHIER]);
-
+   void paireNue(tGrille grille);
+   void paireNueCaché(tGrille grille);
+   int cherchecandidat(tGrille grille, int i, int j,int nombre);
 int main(){
-      tGrille grille1;
-      int nbCase=0;
-      int nbCase2=-1;
-      int numLigne, numColonne, valeur,nbCaseInitial,nbCandidatsInitial;
-      char nomFic[TAILLE_FICHIER];
-      chargerGrille(grille1,nomFic);
-      nbCaseInitial=nbCaseVide(grille1);
-      nbCandidatsInitial=nbCandidatsElimine(grille1);
+   tGrille grille1;
+   int nbCase=0;
+   int nbCase2=-1;
+   int numLigne, numColonne, valeur,nbCaseInitial,nbCandidatsInitial;
+   char nomFic[TAILLE_FICHIER];
+   chargerGrille(grille1,nomFic);
+   nbCaseInitial=nbCaseVide(grille1);
+   nbCandidatsInitial=nbCandidatsElimine(grille1);
+   affichegrille(grille1);
+   
+   initialise(grille1);
+   
+   while(nbCaseVide(grille1)!=0 && nbCase!=nbCase2)
+   {
+      nbCase=nbCaseVide(grille1);    
+      singletonNu(grille1);
+      singletonCaché(grille1);
+      paireNueCaché(grille1);
+      singletonNu(grille1);
+      singletonCaché(grille1); 
+      paireNue(grille1);
+      singletonNu(grille1);
+      singletonCaché(grille1); 
+         
+         
+      
+         
+      
       affichegrille(grille1);
       
-      initialise(grille1);
       
-      while(nbCaseVide(grille1)!=0 && nbCase!=nbCase2)
-      {
-         nbCase=nbCaseVide(grille1);
-         singletonNu(grille1);
-         singletonCaché(grille1);   
-         affichegrille(grille1);
-         nbCase2=nbCaseVide(grille1);
       
-      }
+      nbCase2=nbCaseVide(grille1);
+   }
       statistique(grille1,nbCaseInitial,nbCandidatsInitial,nomFic);
       
       return EXIT_SUCCESS;
@@ -415,4 +428,229 @@ void statistique(tGrille grille, float nbCaseVideInitial,float nbCandidatsInitia
    printf("\n\n***** Résultat pour %s ******\n\n",nomFichier);
    printf("Nombre de cases remplies = %.0f sur %.0f  Taux de remplissage = %.2f%%\n\n",nbCaseVideFinal,nbCaseVideInitial,taux);
    printf("Nombre de Candidats elimines = %.0f     Pourcentage d'elimination = %.2f%%\n\n",nbCandidatsFinal,pourcentage);
+}
+
+void paireNue(tGrille grille){
+   int coord1[2];
+   int coord2[2];
+   bool paire1[2];
+   bool paire2[2];
+   
+   
+   
+   for (int i = 2; i <= 8; i=i+N)
+   {
+      for (int j = 2; j <= 8; j=j+N)
+      {
+         
+         for (int x = i; x > i-2; x--)
+         {
+            for (int y = j; y > j-2; y--)
+            {
+               
+               if (grille[x][y].valeur==0)
+               {
+                  
+                  if(grille[x][y].nbCandidats==2)
+                  {
+                     int valpaire=0;
+                     paire1[0]=0;
+                     paire1[1]=0;
+                     coord1[0]=0;
+                     coord1[1]=0;
+                     
+                     paire1[0]=grille[x][y].candidats[0];  
+                     paire1[1]=grille[x][y].candidats[1];   
+                     coord1[0]=x;
+                     coord1[1]=y;
+                        
+                     
+                     for (int m = x; m > i-2; m--)
+                     {
+                        for (int l = y; l > j-2; l--)
+                        {
+                           if (m!=x||l!=y)
+                           {
+                              if (grille[m][l].nbCandidats==2)
+                              {
+                                 coord2[0]=0;
+                                 coord2[1]=0;
+                                 
+                                 if (grille[m][l].candidats[0]==paire1[0] && grille[m][l].candidats[1]==paire1[1])
+                                 {
+                                    coord2[0]=m;
+                                    coord2[1]=l;
+                                    
+                                    
+                                    for (int u = i; u > i-2; u--)
+                                    {
+                                       for (int p = j; p > j-2; p--)
+                                       {
+                                          
+                                          if (coord1[0]!=u||coord1[1]!=p)
+                                          {
+                                             if (coord2[0]!=u||coord2[1]!=p)
+                                             {
+                                                retirerCandidat(&grille[u][p],paire1[0]);
+                                                retirerCandidat(&grille[u][p],paire1[1]);
+                                                
+                                             }
+                                             
+                                          }
+                                          
+                                       }
+                                    }
+                                 }
+                                 
+                              }
+                           }
+                           
+                           
+                           
+                        }
+                     }
+                     
+                     }   
+                     
+                     
+                  }
+               }
+               
+               
+            }
+            
+         }
+         
+      }
+      
+   }
+
+
+
+int cherchecandidat(tGrille grille, int i, int j,int nombre){
+   int compteur=0;
+   for (int x = i; x > i-2; x--)
+   {
+      for (int y = j; y > j-2; y--)
+      {
+         if(grille[x][y].valeur==0){
+            
+               if (estCandidat(grille[x][y],nombre)==true)
+               {
+                  compteur++;
+                  
+                  
+               }
+               
+            
+            
+         }
+      }
+   }
+   return compteur;
+}
+   
+void paireNueCaché(tGrille grille){
+   int compteur=0;
+   bool nbCandidats[10];
+   
+   
+   for (int i = 2; i <= 8; i=i+N)
+   {
+      for (int j = 2; j <= 8; j=j+N)
+      {
+         for (int k = 1; k < 10; k++)
+         {
+            
+            nbCandidats[k]=false;
+         }
+         compteur=0;
+         for (int k = 1; k < 10; k++)
+         {
+            
+            if(cherchecandidat(grille,i,j,k)==2){
+               nbCandidats[k]=true;
+               compteur++;
+            }
+            
+         }
+         if(compteur>=2)
+         {
+            for (int k = 1; k < 10; k++)
+            {
+               if (nbCandidats[k]==true)
+               {
+                  for (int p = 1; p < 10; p++)
+                  {
+                     if (nbCandidats[p]==true&&p!=k)
+                     {
+                        for (int x = i; x > i-2; x--)
+                        {
+                           for (int y = j; y > j-2; y--)
+                           {
+                              compteur=0;
+                              
+                              if (estCandidat(grille[x][y],k)==true && estCandidat(grille[x][y],p)==true)
+                              {
+                                    compteur++;
+                                    
+                                    
+                              }
+
+                                 
+                              
+                              if (compteur==1)
+                              {
+                                 
+                                 for (int m = x; m > i-2; m--)
+                                 {
+                                    for (int l = y; l > j-2; l--)
+                                    {
+                                       compteur==0;
+                                       if (m!=x||l!=y)
+                                       {
+                                          
+                                          if (estCandidat(grille[m][l],k)==true&& estCandidat(grille[m][l],p)==true)
+                                          {
+                                             compteur++;
+                                          }
+
+                                             
+                                          if (compteur==1)
+                                          {
+                                             for (int b = 1; b < 10; b++)
+                                             {
+                                                if (b!=k && b!=p)
+                                                {
+                                                   retirerCandidat(&grille[x][y],b);
+                                                   retirerCandidat(&grille[m][l],b);
+                                                }
+                                                
+                                             }
+                                             
+                                             
+                                          }
+                                          
+                                       }
+                                    }
+                              }
+                              
+                              
+                           }
+                     
+                        }
+                  
+                  }
+               
+         }
+                  
+      }
+
+         
+   }
+
+}
+}
+}  
+} 
 }
