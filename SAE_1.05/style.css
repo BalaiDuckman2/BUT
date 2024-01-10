@@ -23,7 +23,7 @@ body{
 
 h1{
     font-size: 3em;
-    font-family: "Arbutus Slab";
+    font-family: "arbutus";
 }
 
 h2{
@@ -37,12 +37,16 @@ h3{
 h4{
     font-size: 1.5em;
 }
+figure+p::first-letter{
+    font-family: 'heartbreakingb';
+    font-size: 50px;
+}
 
-#realisateur, section{
+#realisateur, section,#video{
     background-color: #eceff4;
     width: 75%;
     color: black;
-    margin: 40px 75px 0;
+    margin: 40px 5em 0;
     padding: 0 30px;
     display: inline-flex;
     flex-wrap: wrap;
@@ -52,7 +56,7 @@ h4{
 #episode{
     background-color: #eceff4;
     color: black;
-    margin: 40px 75px 40px 75px;
+    margin: 40px 5em 0;
     display: inline-flex;
     flex-wrap: wrap;
 }
@@ -70,7 +74,7 @@ h4{
 }
 
 section > header{
-    margin-right: 55%;
+    margin-right: 35vw ;
     margin-left: 10px;
 }
 
@@ -90,35 +94,33 @@ section > header{
     
 }
 
-#acteur >div> figure > figcaption {
+#acteur > figure > figcaption {
     text-align: left;
 }
 
-#acteur>div > p{
+#acteur > p{
     text-align: left;
 }
 
-#acteur >div > figure {
+#acteur > figure {
    
     margin-left: auto;
     margin-right: auto;
 }
 
 #acteur >header{
-    margin-right: 40%;
+    margin-right: 35vw;
 }
 
 #realisateur > figure > img {
     width: 10%;
 }
 
-div> article > img {
+#critique >div> article > img {
     width: 50px;
 }
 
-div {
-    height: 500px;
-}
+
 
 #double > section {
     width: 48vw;
@@ -134,7 +136,8 @@ div {
 
 #double {
     display: inline-flex;
-    margin: 40px 75px 0;
+    margin: 40px 5em 0;
+
 }
 
 #critique {
@@ -182,10 +185,193 @@ div {
   }
 
 #critique>header{
-    margin: 0;
+    margin-right: 0;
 }
 
 #realisateur>figure>img{
     width: 100%;
 }
+main>h1{
+    margin-left: 5em;
+}
   
+#logo{
+    margin-top: 50px;
+   
+}
+
+#logo>img{
+    margin-left: 100px;
+}
+
+
+
+
+main>header{
+    background-color: #3e67cf;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5em;
+}
+
+main>header h1{
+    color: #bcffca;
+    margin: 0;
+    margin-left: 0.5em;
+    margin-right: auto;
+}
+
+nav{
+    align-self: flex-end;
+}
+
+nav ul{
+    display: flex;
+    flex-direction: row;
+    flex-basis: 35%;
+    justify-content: flex-end;
+    margin: 0;
+    padding: 0.75em;
+    border-radius: 33px;
+    background-color: #212121;
+}
+
+nav ul a li{
+    list-style: none;
+    padding: 0 1.25em;
+    color: #bcffca;
+    border-right: 1px solid #7DC0FE;
+}
+
+nav ul a + a + a + a li{
+    border-right: none;
+}
+
+nav ul a:link, nav ul a:visited{
+    text-decoration: none;
+    color: #bcffca;
+}
+
+nav li:hover, nav li:active{
+    background-color: #bcffca;
+    color: #212121;
+}
+
+footer{
+    padding: 1.5em;
+    color: #ECEFF4;
+}
+
+footer h2{
+    margin-bottom: 0;
+    padding: 0;
+}
+
+footer h3{
+    margin-bottom: 0.5em;
+    text-align: center;
+    color: #ECEFF4;
+}
+
+footer .row .row{
+    display: flex;
+    align-items: center;
+}
+
+footer .row .row img{
+    margin-right: 10px
+}
+
+div img+div h2{
+    margin: 0;
+}
+
+.tabas{
+    background-image: url(image/k.png);
+}
+
+footer .row{
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+footer .row+.row{
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+footer .row +.row .col div img {
+    margin: 0 0.5em;
+}
+
+footer a:link, footer a:visited{
+    text-decoration: none;
+    color: #ECEFF4;
+    text-decoration: underline;
+}
+
+footer a:hover, footer a:active{
+    background-color: none;
+    color: #ECEFF4;
+}
+
+
+
+ul{
+    padding-left: 0;
+}
+
+.row{
+    display: flex;
+}
+
+.col{
+    display: flex;
+    flex-direction: column;
+    margin: 0 1em;
+}
+
+footer{
+    background-color: #3e67cf;
+    border-radius: 20px;
+}
+
+@media screen and (max-width: 1122px){
+    header h1{
+        display: none;
+    }
+}
+
+@media screen and (max-width: 692px){
+    header{
+        flex-direction: column;
+        align-items: center;
+    }
+    header img{
+        align-self: flex-start;
+        margin-bottom: 1em;
+    }
+}
+
+@media screen and (max-width: 609px){
+    h1{
+        display: none;
+    }
+}
+
+@media screen and (max-width: 567px){
+    .tabas{
+        display: none;
+    }
+
+    footer .row{
+        justify-content: center;
+    }
+
+    footer .row+.row h3{
+        margin-top: 2.5em;
+    }
+}
