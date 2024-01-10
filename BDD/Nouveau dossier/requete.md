@@ -2,7 +2,7 @@
 PRODUIT{NOMP}
 
 /* 2.Quels sont les produits originaires de ’Dijon’ ? */
-PRODUIT WHERE ORIGINE = DVILLE('Dijon')
+    PRODUIT WHERE ORIGINE = DVILLE('Dijon')
 
 /* 3.Quels sont les noms des produits originaires de ’Dijon’ ? */
 (PRODUIT WHERE ORIGINE = DVILLE ('Dijon'))

@@ -488,35 +488,21 @@ void paireNue(tGrille grille){
                                                 grille[u][p].candidats[paire1[0]]=false;
                                                 grille[u][p].candidats[paire1[1]]=false;
                                              }
-                                             
                                           }
-                                          
                                        }
                                     }
                                  }
-                                 
                               }
                            }
-                           
-                           
-                           
                         }
                      }
-                     
-                     }   
-                     
-                     
-                  }
+                  }   
                }
-               
-               
             }
-            
          }
-         
       }
-      
    }
+}
 
 int cherchecandidat(tGrille grille, int i, int j,int nombre){
    int compteur=0;
