@@ -96,8 +96,7 @@ void liste(char nomFic[]){
     {
         
         printf("%s\n",abo.c_nom);
-        printf("%s\n",abo.c_num);
-        printf("%d\n",abo.c_duree);
+
         fread(&abo,sizeof(abo),1,f);
 
 
@@ -156,31 +155,29 @@ void copier(char nomFic[], t_tabAbo t_abo){
     fclose(f);
 }
 void trier(t_tabAbo t_abo , int nb){
-    bool fin =false;
-    int i=0;
-    int y=0;
-    while (i<nb)
+    t_abonne conteneur;
+    int compteur;
+    compteur = 0;
+    for (int x = 0; x < nb; x++)
     {
-        
-        if(strcmp(t_abo[i].c_nom,t_abo[i+1].c_nom)>0){
-            printf("o");
-            permuter(&t_abo[i],&t_abo[i+1]);
-            i++;
-            y=i;
-            while (strcmp(t_abo[y].c_nom,t_abo[y+1].c_nom)>0)
-            {
-                permuter(&t_abo[y],&t_abo[y+1]);
-                y++;
+        for(int y=x+1; y<nb ;y++){
+            if(strcmp(t_abo[y].c_nom,t_abo[x].c_nom)<0){
+                conteneur = t_abo[y];
+                t_abo[y] = t_abo[x];
+                t_abo[x] = conteneur;
+
+                
             }
-            
-        }else{
-            i++;
         }
-              
     }
+    
+        
+        
+        
     
     
 }
+
 void recopier(char nomFic[], t_tabAbo t_abo, int nb){
     int i=0;
     FILE * f;

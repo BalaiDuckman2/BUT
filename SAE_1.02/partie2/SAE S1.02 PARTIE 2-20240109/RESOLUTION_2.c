@@ -7,8 +7,11 @@
 //déclaration des constantes
 #define N 4
 #define TAILLE (N*N) 
+#define TAILLE_TOUT (TAILLE*TAILLE)
+
 const int TAILLE_FICHIER = 30;
 const int DEBUT = 0;
+
 
 
 //déclaration du type tGrille 
@@ -25,11 +28,11 @@ int main(){
   
    tGrille grille1;
    int numLigne, numColonne, valeur;
-   srand(time(NULL));
+   
    chargerGrille(grille1);
    affichegrille(grille1);
    clock_t begin = clock();
-   
+   srand(time(NULL));
    backtracking(grille1,0);
    clock_t end = clock();
    double  tmpsCPU = (end - begin)*1.0 / CLOCKS_PER_SEC;

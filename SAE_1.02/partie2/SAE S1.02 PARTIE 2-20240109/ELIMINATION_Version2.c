@@ -2,10 +2,11 @@
    #include <stdio.h>
    #include <string.h>
    #include <stdbool.h>
+   #include <time.h>
 
    //déclaration des constantes
    const int TAILLE_FICHIER = 30;
-   #define N 3
+   #define N 4
    const int DEBUT = 0;
    #define TAILLE (N*N) 
    #define TAILLE_TOUT (TAILLE*TAILLE)
@@ -13,7 +14,7 @@
    //déclaration du type tGrille 
    typedef struct {
       int valeur;
-      bool candidats[TAILLE + 1];
+      bool candidats[TAILLE+1];
       int nbCandidats;
    } tCase1;
 
@@ -25,6 +26,8 @@
    void saisir(int *valeur);
    bool possible(tGrille grille,int ligne,int colonne,int valeur);
    bool grilleComplete(tGrille grille);
+   bool backtracking(tGrille grille, int numeroCase);
+
 
    void ajouterCandidat(tCase1 laCase, int val);
    void retirerCandidat(tCase1 laCase, int val);
@@ -53,33 +56,26 @@
       nbCandidatsInitial=nbCandidatsElimine(grille1);
       affichegrille(grille1);
       
+      srand(time(NULL));
       initialise(grille1);
-      
+      clock_t begin = clock();
       while(nbCaseVide(grille1)!=0 && nbCase!=nbCase2)
       {
-         
          nbCase=nbCaseVide(grille1);
-           
-         
-         
-         
-         
          singletonNu(grille1);
-         singletonCaché(grille1);
-         
-         
-             
-         
-         
-         
-         affichegrille(grille1);
-         
-         
-         
+         singletonCaché(grille1);                                                      
          nbCase2=nbCaseVide(grille1);
+         
+         
       }
-      statistique(grille1,nbCaseInitial,nbCandidatsInitial,nomFic);
       
+      backtracking(grille1,0);
+      clock_t end = clock();
+      
+      affichegrille(grille1);
+      double  tmpsCPU = (end - begin)*1.0 / CLOCKS_PER_SEC;
+      printf( "\nTemps CPU = %.3f secondes\n",tmpsCPU);
+
       return EXIT_SUCCESS;
    }
 
@@ -110,30 +106,35 @@
    }   
 
    void affichegrille(tGrille grille){
-      printf("    1  2  3   4  5  6   7  8  9\n");
-      printf("  +---------+---------+---------+");
+   
+   printf("  +--------------------+--------------------+--------------------+--------------------+\n  |");
 
-      for(int ligne=DEBUT; ligne<TAILLE; ligne++){
-         printf("\n%d |",ligne+1);
-         for(int collone=DEBUT; collone <TAILLE;collone++){
-            if(grille[ligne][collone].valeur==0){
-               printf(" . ");
-            }else{
-               printf(" %d ",grille[ligne][collone].valeur);
-            }
-            if(collone==2 || collone ==5){
-               printf("|");
-            }   
+   for(int ligne=DEBUT; ligne<TAILLE; ligne++){
+      
+      for(int collone=DEBUT; collone <TAILLE;collone++){
+         if(grille[ligne][collone].valeur==0){
+            printf("  .  ");
+         }else{
+            printf(" %3d ",grille[ligne][collone].valeur);
          }
-         printf("|");
-         if(ligne==2 || ligne ==5){
-               printf("\n  +---------+---------+---------+");
-            }
-
+         if(collone==3 || collone ==7||collone==11){
+            printf("|");
+         }   
       }
-      printf("\n  +---------+---------+---------+\n");
-
+      printf("|");
+      if (ligne!=15&& ligne !=7 && ligne!=11&&ligne!=3)
+      {
+         printf("\n  |");
+      }
+      
+      if(ligne==3 || ligne ==7 || ligne==11){
+            printf("\n  +--------------------+--------------------+--------------------+--------------------+\n  |");
+         }
+      
    }
+   printf("\n  +--------------------+--------------------+--------------------+--------------------+\n");
+
+}
 
 
 
@@ -157,9 +158,9 @@ bool possible(tGrille grille, int ligne, int colonne, int valeur) {
             while (finboucle == false && j <= TAILLE) {
                 if (ligne < i && colonne < j) {
                     recupi = i;
-                    while (finboucle == false && i >= recupi - 2) {
+                    while (finboucle == false && i >= recupi - 3) {
                         recupj = j;
-                        while (finboucle == false && j >= recupj - 2) {
+                        while (finboucle == false && j >= recupj - 3) {
                             if (valeur == grille[i - 1][j - 1].valeur) {
                                 fin = false;
                                 finboucle = true;
@@ -177,6 +178,42 @@ bool possible(tGrille grille, int ligne, int colonne, int valeur) {
         }
     }
     return fin;
+}
+
+bool backtracking(tGrille grille, int numeroCase){
+   int ligne=0,colonne=0;
+   bool resultat=false;
+   if (numeroCase == TAILLE*TAILLE)
+   {
+      resultat=true;
+   }else{
+      ligne=numeroCase/TAILLE;
+      colonne=numeroCase%TAILLE;
+      if (grille[ligne][colonne].valeur!=0)
+      {
+         resultat= backtracking(grille,numeroCase+1);
+      }else{
+         for (int valeur = 1; valeur <= TAILLE; valeur++)
+         {
+            if (possible(grille,ligne,colonne,valeur))
+            {
+               grille[ligne][colonne].valeur=valeur;
+               if (backtracking(grille,numeroCase+1)==true)
+               {
+                  resultat=true;
+               }else{
+                  grille[ligne][colonne].valeur=0;
+               }
+               
+            }
+            
+         }
+         
+      }
+      
+   }
+   return resultat;
+   
 }
 
 
@@ -211,7 +248,7 @@ bool possible(tGrille grille, int ligne, int colonne, int valeur) {
             if (tab[i][j].valeur==0)
             {
                tab[i][j].nbCandidats=0;
-               for (int x = 1; x < 10; x++)
+               for (int x = 1; x < TAILLE+1; x++)
                {
                   
                   if (possible(tab, i, j, x)==true) {
@@ -283,9 +320,9 @@ int possibleCaché(tGrille grille, int ligne, int colonne, int valeur) {
             while (finboucle == false && j <= TAILLE) {
                 if (ligne < i && colonne < j) {
                     recupi = i;
-                    while (finboucle == false && i >= recupi - 2) {
+                    while (finboucle == false && i >= recupi - 3) {
                         recupj = j;
-                        while (finboucle == false && j >= recupj - 2) {
+                        while (finboucle == false && j >= recupj - 3) {
                            if (grille[i - 1][j - 1].valeur==0)
                            {
                            
@@ -316,7 +353,7 @@ void singletonCaché(tGrille tab){
          
 
          if (tab[i][j].valeur==0){
-            for (int x = 1; x < 10; x++)
+            for (int x = 1; x < TAILLE+1; x++)
             {
 
                if (tab[i][j].candidats[x]==true)
@@ -328,7 +365,7 @@ void singletonCaché(tGrille tab){
                      
                      tab[i][j].valeur=x;
                      initialise(tab);
-                     x=10;
+                     x=TAILLE+1;
                   }
                }
                
@@ -371,7 +408,7 @@ int nbCandidatsElimine(tGrille tab){
             if (tab[i][j].valeur==0)
             {
                
-               for (int x = 1; x < 10; x++)
+               for (int x = 1; x < TAILLE+1; x++)
                {
                   
                   if (possible(tab, i, j, x)==true) {

@@ -3,7 +3,7 @@
 #include <string.h>
 #include <stdbool.h>
 //déclaration des constantes
-#define N 10
+#define N 80
 typedef int tab[N];
 
 
@@ -11,7 +11,7 @@ void tri_selection(tab t);
 
 int main(){
    //déclaration des variables
-    tab tableau = {9,5,7,4,1,2,0,8,6,3};
+    tab tableau = {9,5,4,4,1,2,0,8,6,3,9,5,4,4,1,2,0,8,6,3,9,5,4,4,1,2,0,8,6,3,9,5,4,4,1,2,0,8,6,3,9,5,4,4,1,2,0,8,6,3,9,5,4,4,1,2,0,8,6,3,9,5,4,4,1,2,0,8,6,3};
     tri_selection(tableau);
     for(int i=0;i<N;i++){
         printf("%d ",tableau[i]);

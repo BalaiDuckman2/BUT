@@ -41,7 +41,7 @@ void affiche(tabnoms t,int n){
 
 void maintienTrie(tabnoms t, int n){
     chaine20 conteneur;
-    int i;
+    
     int compteur;
     compteur = 0;
 
