@@ -42,7 +42,7 @@ figure+p::first-letter{
     font-size: 50px;
 }
 
-#realisateur, section,#video{
+#realisateur, section{
     background-color: #eceff4;
     width: 75%;
     color: black;
@@ -51,6 +51,7 @@ figure+p::first-letter{
     display: inline-flex;
     flex-wrap: wrap;
     border-radius: 20px;
+    
 }
 
 #episode{
@@ -74,6 +75,7 @@ figure+p::first-letter{
 }
 
 section > header{
+    width: 35vw;
     margin-right: 35vw ;
     margin-left: 10px;
 }
@@ -89,10 +91,7 @@ section > header{
 }
 
 
-#acteur > figure > img {
-    
-    
-}
+
 
 #acteur > figure > figcaption {
     text-align: left;
@@ -108,8 +107,9 @@ section > header{
     margin-right: auto;
 }
 
-#acteur >header{
+#acteur >header,aside>header{
     margin-right: 35vw;
+    width: 35vw;
 }
 
 #realisateur > figure > img {
@@ -123,7 +123,6 @@ section > header{
 
 
 #double > section {
-    width: 48vw;
     margin-right: 0;
     margin-left: 0;
     
@@ -136,7 +135,7 @@ section > header{
 
 #double {
     display: inline-flex;
-    margin: 40px 5em 0;
+    margin: 40px 0 0 5em;
 
 }
 
@@ -192,7 +191,8 @@ section > header{
     width: 100%;
 }
 main>h1{
-    margin-left: 5em;
+    
+    margin-left: 0.5em;
 }
   
 #logo{
@@ -202,6 +202,17 @@ main>h1{
 
 #logo>img{
     margin-left: 100px;
+}
+
+
+main>article{
+    margin-left:5em ;
+    margin-top: 40px;
+}
+
+video{
+    width: 80vw;
+    
 }
 
 
@@ -373,5 +384,24 @@ footer{
 
     footer .row+.row h3{
         margin-top: 2.5em;
+    }
+
+}
+
+@media screen and (max-width: 917px){
+
+    #double{
+        display: inline-flex;
+        flex-wrap: wrap ;
+    }
+    #realisateur,#critique{
+        width: 75vw;
+        background-color: #eceff4;
+        color: black;
+        margin-left: 0;
+        
+    }
+    #critique2{
+        display: none;
     }
 }
