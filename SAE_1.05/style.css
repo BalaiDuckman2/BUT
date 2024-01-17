@@ -42,15 +42,16 @@ figure+p::first-letter{
     font-size: 50px;
 }
 
-#realisateur, section,#video{
+#realisateur, section{
     background-color: #eceff4;
     width: 75%;
     color: black;
-    margin: 40px 5em 0;
+    margin: 40px 5em 0 ;
     padding: 0 30px;
     display: inline-flex;
     flex-wrap: wrap;
     border-radius: 20px;
+    
 }
 
 #episode{
@@ -74,6 +75,7 @@ figure+p::first-letter{
 }
 
 section > header{
+    width: 35vw;
     margin-right: 35vw ;
     margin-left: 10px;
 }
@@ -89,10 +91,7 @@ section > header{
 }
 
 
-#acteur > figure > img {
-    
-    
-}
+
 
 #acteur > figure > figcaption {
     text-align: left;
@@ -108,8 +107,9 @@ section > header{
     margin-right: auto;
 }
 
-#acteur >header{
+#acteur >header,aside>header{
     margin-right: 35vw;
+    width: 35vw;
 }
 
 #realisateur > figure > img {
@@ -123,7 +123,6 @@ section > header{
 
 
 #double > section {
-    width: 48vw;
     margin-right: 0;
     margin-left: 0;
     
@@ -136,7 +135,7 @@ section > header{
 
 #double {
     display: inline-flex;
-    margin: 40px 5em 0;
+    margin: 40px 0 0 5em;
 
 }
 
@@ -192,7 +191,8 @@ section > header{
     width: 100%;
 }
 main>h1{
-    margin-left: 5em;
+    
+    margin-left: 0.5em;
 }
   
 #logo{
@@ -204,6 +204,17 @@ main>h1{
     margin-left: 100px;
 }
 
+
+main>article{
+    margin-left:5em ;
+    margin-top: 40px;
+}
+
+video{
+    width: 80vw;
+}
+
+/************************************************* Header Footer *************************************************/
 
 
 
@@ -339,6 +350,9 @@ footer{
     border-radius: 20px;
 }
 
+/************************************************* media queri *************************************************/
+
+
 @media screen and (max-width: 1122px){
     header h1{
         display: none;
@@ -374,4 +388,75 @@ footer{
     footer .row+.row h3{
         margin-top: 2.5em;
     }
+
 }
+
+@media screen and (max-width: 917px){
+
+    #double{
+        display: inline-flex;
+        flex-wrap: wrap ;
+    }
+    #realisateur,#critique{
+        width: 75vw;
+        background-color: #eceff4;
+        color: black;
+        margin-left: 0;
+        
+    }
+    #critique2{
+        display: none;
+    }
+}
+
+@media screen and (max-width: 1105px){
+    #episode > article,#episode > aside{
+        margin-left: auto;
+        margin:auto ;
+    }
+    #episode > article>figure,#episode > article>p{
+        margin-left: 0;
+    }
+    #episode > aside>figure,#episode > aside>p{
+        margin-left: 0;
+    }
+    #acteur > figure {
+        margin-left: 7vw;
+    }
+
+}
+
+@media screen and (max-width: 805px){
+    #acteur > figure {
+        margin: auto;
+    }
+
+
+}
+
+::-webkit-scrollbar-track {
+    background-color: #F5F5F5;
+}
+
+::-webkit-scrollbar {
+    height: 6px;
+    background-color: #F5F5F5;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #3d4852;
+    border-radius: 3px;
+}
+.carousel-items {
+    display: flex;
+    overflow-x: scroll;
+    padding: 1rem 0;
+    scroll-snap-type: x mandatory;
+}
+
+.carousel-item {
+    flex: 1 0 250px;
+    margin-left: 1rem;
+    scroll-snap-align: start;
+}
+
