@@ -46,7 +46,7 @@ figure+p::first-letter{
     background-color: #eceff4;
     width: 75%;
     color: black;
-    margin: 40px 5em 0;
+    margin: 40px 5em 0 ;
     padding: 0 30px;
     display: inline-flex;
     flex-wrap: wrap;
@@ -212,9 +212,9 @@ main>article{
 
 video{
     width: 80vw;
-    
 }
 
+/************************************************* Header Footer *************************************************/
 
 
 
@@ -350,6 +350,9 @@ footer{
     border-radius: 20px;
 }
 
+/************************************************* media queri *************************************************/
+
+
 @media screen and (max-width: 1122px){
     header h1{
         display: none;
@@ -405,3 +408,55 @@ footer{
         display: none;
     }
 }
+
+@media screen and (max-width: 1105px){
+    #episode > article,#episode > aside{
+        margin-left: auto;
+        margin:auto ;
+    }
+    #episode > article>figure,#episode > article>p{
+        margin-left: 0;
+    }
+    #episode > aside>figure,#episode > aside>p{
+        margin-left: 0;
+    }
+    #acteur > figure {
+        margin-left: 7vw;
+    }
+
+}
+
+@media screen and (max-width: 805px){
+    #acteur > figure {
+        margin: auto;
+    }
+
+
+}
+
+::-webkit-scrollbar-track {
+    background-color: #F5F5F5;
+}
+
+::-webkit-scrollbar {
+    height: 6px;
+    background-color: #F5F5F5;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #3d4852;
+    border-radius: 3px;
+}
+.carousel-items {
+    display: flex;
+    overflow-x: scroll;
+    padding: 1rem 0;
+    scroll-snap-type: x mandatory;
+}
+
+.carousel-item {
+    flex: 1 0 250px;
+    margin-left: 1rem;
+    scroll-snap-align: start;
+}
+
