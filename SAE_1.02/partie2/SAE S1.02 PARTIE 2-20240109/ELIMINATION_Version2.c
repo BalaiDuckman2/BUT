@@ -35,6 +35,7 @@
    int nbCandidats(tCase1 laCase);
    void singletonNu(tGrille tab);
    void initialise(tGrille tab);
+   void initialiseCase(tGrille tab, int ligne, int colonne);
    int possibleCaché(tGrille grille, int ligne, int colonne, int valeur);
    void singletonCaché(tGrille tab);
    int nbCaseVide(tGrille tab);
@@ -54,24 +55,30 @@
       chargerGrille(grille1,nomFic);
       nbCaseInitial=nbCaseVide(grille1);
       nbCandidatsInitial=nbCandidatsElimine(grille1);
+      
       affichegrille(grille1);
       
       srand(time(NULL));
-      initialise(grille1);
+      
       clock_t begin = clock();
+      initialise(grille1);
       while(nbCaseVide(grille1)!=0 && nbCase!=nbCase2)
       {
+         
          nbCase=nbCaseVide(grille1);
+         
          singletonNu(grille1);
-         singletonCaché(grille1);                                                      
+         paireNue(grille1)
+         singletonCaché(grille1);  
+                                                           
          nbCase2=nbCaseVide(grille1);
          
          
       }
       
+      
       backtracking(grille1,0);
       clock_t end = clock();
-      
       affichegrille(grille1);
       double  tmpsCPU = (end - begin)*1.0 / CLOCKS_PER_SEC;
       printf( "\nTemps CPU = %.3f secondes\n",tmpsCPU);
@@ -85,8 +92,9 @@
    void chargerGrille(tGrille grille, char nomFichier[TAILLE_FICHIER]){
       
       FILE * f;
-      printf("Nom du fichier : ");
-      scanf("%s", nomFichier);
+      nomFichier = "MaxiGrilleB.sud";
+      //printf("Nom du fichier : ");
+      //scanf("%s", nomFichier);
       f = fopen(nomFichier, "rb");
       if (f==NULL)
       {
@@ -216,6 +224,34 @@ bool backtracking(tGrille grille, int numeroCase){
    
 }
 
+void initialiseCase(tGrille tab, int ligne, int colonne){
+   for (int i = 0; i < TAILLE; i++)
+   {
+      tab[i][colonne].nbCandidats=0;
+      tab[ligne][i].nbCandidats=0;
+      for (int x = 1; x < TAILLE+1; x++)
+      {
+         
+         if (possible(tab, i, colonne, x)==true && tab[i][colonne].valeur==0 ) {
+            tab[i][colonne].nbCandidats++;
+            tab[i][colonne].candidats[x]=true;
+            
+         }else{
+            tab[i][colonne].candidats[x]=false;
+         }
+         if (possible(tab, ligne, i, x)==true && tab[ligne][i].valeur==0 ) {
+            tab[ligne][i].nbCandidats++;
+            tab[ligne][i].candidats[x]=true;
+         }else{
+            tab[ligne][i].candidats[x]=false;
+         
+         }
+
+      }
+      
+   }   
+}
+
 
 
 
@@ -291,7 +327,7 @@ void singletonNu(tGrille tab){
                      
                      tab[i][j].valeur= x;
                      
-                     initialise(tab);
+                     initialiseCase(tab,i,j);
                      
                   }
                }
@@ -364,7 +400,7 @@ void singletonCaché(tGrille tab){
                   {
                      
                      tab[i][j].valeur=x;
-                     initialise(tab);
+                     initialiseCase(tab,i,j);
                      x=TAILLE+1;
                   }
                }
@@ -458,85 +494,89 @@ void paireNue(tGrille grille){
    int coord1[2];
    int coord2[2];
    bool paire1[2];
-  
+  int x=0;
+  int y=0;
+  bool fin=false;
    
    
    
    for (int i = 2; i <= 8; i=i+N)
    {
+      x=i;
       for (int j = 2; j <= 8; j=j+N)
       {
+         y=j;
+         printf("oui");
          
-         for (int x = i; x > i-2; x--)
-         {
-            for (int y = j; y > j-2; y--)
+            while (x!=i-2&&fin==false)
             {
-               
-               if (grille[x][y].valeur==0)
+               while (y!=j-2 && fin==false)
                {
-                  
-                  if(grille[x][y].nbCandidats==2)
+                  if (grille[x][y].valeur==0)
                   {
-                     int valpaire=0;
-                     paire1[0]=0;
-                     paire1[1]=0;
-                     coord1[0]=0;
-                     coord1[1]=0;
-                     for (int k = 1; k < 10; k++)
+                     
+                     if(grille[x][y].nbCandidats==2)
                      {
-                        
-                        if (grille[x][y].candidats[k]==true)
+                        int valpaire=0;
+                        paire1[0]=0;
+                        paire1[1]=0;
+                        coord1[0]=x;
+                        coord1[1]=y;
+                        for (int k = 1; k < 10; k++)
                         {
-                           paire1[valpaire]=k;
-                           valpaire++;
-                           coord1[0]=x;
-                           coord1[1]=y;
+                           if (grille[x][y].candidats[k]==true)
+                           {
+                              paire1[valpaire]=k;
+                              valpaire++;
+                              
+                              fin=true;
+                           }
                         }
                      }
-                     for (int m = x; m > i-2; m--)
+                  }
+                  y--;
+               }
+               
+               x--;
+            }
+            while (x!=i-2&&fin==true)
+            {
+               while (y!=j-2&&fin==true)
+               {
+                  if(grille[x][y].nbCandidats==2)
+                  {
+                     coord2[0]=0;
+                     coord2[1]=0;
+                     if (grille[x][y].candidats[paire1[0]]==true && grille[x][y].candidats[paire1[1]]==true)
                      {
-                        for (int l = y; l > j-2; l--)
-                        {
-                           if (m!=x||l!=y)
+                        coord2[0]=x;
+                        coord2[1]=y;
+                        for (int u = i; u > i-2; u--)
                            {
-                              if (grille[m][l].nbCandidats==2)
+                              for (int p = j; p > j-2; p--)
                               {
-                                 coord2[0]=0;
-                                 coord2[1]=0;
                                  
-                                 if (grille[m][l].candidats[paire1[0]]==true && grille[m][l].candidats[paire1[1]]==true)
+                                 if (coord1[0]!=u||coord1[1]!=p)
                                  {
-                                    coord2[0]=m;
-                                    coord2[1]=l;
-                                    
-                                    
-                                    for (int u = i; u > i-2; u--)
+                                    if (coord2[0]!=u||coord2[1]!=p)
                                     {
-                                       for (int p = j; p > j-2; p--)
-                                       {
-                                          
-                                          if (coord1[0]!=u||coord1[1]!=p)
-                                          {
-                                             if (coord2[0]!=u||coord2[1]!=p)
-                                             {
-                                                
-                                                grille[u][p].candidats[paire1[0]]=false;
-                                                grille[u][p].candidats[paire1[1]]=false;
-                                             }
-                                          }
-                                       }
+                                       
+                                       grille[u][p].candidats[paire1[0]]=false;
+                                       grille[u][p].candidats[paire1[1]]=false;
                                     }
                                  }
                               }
                            }
-                        }
                      }
-                  }   
+                     
+                  }
+                  j--;
                }
+               x--;
             }
+            
          }
       }
-   }
 }
 
 int cherchecandidat(tGrille grille, int i, int j,int nombre){
