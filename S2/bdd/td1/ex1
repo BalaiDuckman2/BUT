@@ -1,0 +1,32 @@
+VAR CENTRES REAL RELATION{
+    NOM_CENTRE CHAR
+    capacite_centre CHAR
+    nom_pays CHAR
+}KEY {NOM_CENTRE}
+
+VAR STAGES REAL RELATION{
+    NO_STAGE INTEGER
+    niveau_stage CHAR
+}KEY {NO_STAGE}
+
+CONSTRAINT tages_fk_centress
+    stages{no_stage} <= centres{nom_centre}
+    
+
+VAR CLIENTS REAL RELATION{
+    NO_CLIENT INTEGER
+    nom CHAR
+    prenom CHAR
+    adresse CHAR
+    code_postal CHAR
+    ville CHAR
+    tel_client CHAR
+}KEY {NO_CLIENT}
+
+VAR INSCRIPTIONS REAL RELATION{
+    date_inscription CHAR
+    NO_CLIENT INTEGER
+    NO_STAGE INTEGER
+}
+CONSTRAINT 
+    stages{no_stage}
