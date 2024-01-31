@@ -23,7 +23,6 @@
 
    void chargerGrille(tGrille grille, char nomFichier[TAILLE_FICHIER]);
    void affichegrille(tGrille grille);
-   void saisir(int *valeur);
    bool possible(tGrille grille,int ligne,int colonne,int valeur);
    bool grilleComplete(tGrille grille);
    bool backtracking(tGrille grille, int numeroCase);
@@ -39,12 +38,6 @@
    int possibleCaché(tGrille grille, int ligne, int colonne, int valeur);
    void singletonCaché(tGrille tab);
    int nbCaseVide(tGrille tab);
-   int nbCandidatsElimine(tGrille tab);
-   void statistique(tGrille grille, float nbCaseVideInitial,float nbCandidatsInitial,char nomFichier[TAILLE_FICHIER]);
-   void paireNue(tGrille grille);
-   void paireNueCaché(tGrille grille);
-   int cherchecandidat(tGrille grille, int i, int j,int nombre);
-
 
    int main(){
       tGrille grille1;
@@ -53,32 +46,28 @@
       int numLigne, numColonne, valeur,nbCaseInitial,nbCandidatsInitial;
       char nomFic[TAILLE_FICHIER];
       chargerGrille(grille1,nomFic);
-      nbCaseInitial=nbCaseVide(grille1);
-      nbCandidatsInitial=nbCandidatsElimine(grille1);
-      
+      printf("Grille initial\n");
       affichegrille(grille1);
-      
       srand(time(NULL));
-      
       clock_t begin = clock();
       initialise(grille1);
       while(nbCase!=nbCase2)
       {
-         
          nbCase=nbCaseVide(grille1);
          singletonNu(grille1);
-         singletonCaché(grille1);                                          
+         paireNue(grille1)
+         singletonCaché(grille1);  
+                                                           
          nbCase2=nbCaseVide(grille1);
-        
+         
          
       }
-      
-      
       backtracking(grille1,0);
       clock_t end = clock();
+      printf("Grille final\n");
       affichegrille(grille1);
       double  tmpsCPU = (end - begin)*1.0 / CLOCKS_PER_SEC;
-      printf( "\nTemps CPU = %.8f secondes\n",tmpsCPU);
+      printf( "\nTemps CPU = %.3f secondes\n",tmpsCPU);
 
       return EXIT_SUCCESS;
    }
@@ -87,11 +76,9 @@
 
 
    void chargerGrille(tGrille grille, char nomFichier[TAILLE_FICHIER]){
-      
       FILE * f;
-      nomFichier = "MaxiGrilleB.sud";
-      //printf("Nom du fichier : ");
-      //scanf("%s", nomFichier);
+      printf("Nom du fichier : ");
+      scanf("%s", nomFichier);
       f = fopen(nomFichier, "rb");
       if (f==NULL)
       {
@@ -503,7 +490,7 @@ void paireNue(tGrille grille){
       for (int j = 2; j <= 8; j=j+N)
       {
          y=j;
-         
+         printf("oui");
          
             while (x!=i-2&&fin==false)
             {
@@ -560,7 +547,6 @@ void paireNue(tGrille grille){
                                        
                                        grille[u][p].candidats[paire1[0]]=false;
                                        grille[u][p].candidats[paire1[1]]=false;
-                                       fin=false;
                                     }
                                  }
                               }
