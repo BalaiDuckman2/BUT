@@ -62,17 +62,14 @@
       
       clock_t begin = clock();
       initialise(grille1);
-      while(nbCaseVide(grille1)!=0 && nbCase!=nbCase2)
+      while(nbCase!=nbCase2)
       {
          
          nbCase=nbCaseVide(grille1);
-         
          singletonNu(grille1);
-         paireNue(grille1)
-         singletonCaché(grille1);  
-                                                           
+         singletonCaché(grille1);                                          
          nbCase2=nbCaseVide(grille1);
-         
+        
          
       }
       
@@ -81,7 +78,7 @@
       clock_t end = clock();
       affichegrille(grille1);
       double  tmpsCPU = (end - begin)*1.0 / CLOCKS_PER_SEC;
-      printf( "\nTemps CPU = %.3f secondes\n",tmpsCPU);
+      printf( "\nTemps CPU = %.8f secondes\n",tmpsCPU);
 
       return EXIT_SUCCESS;
    }
@@ -506,7 +503,7 @@ void paireNue(tGrille grille){
       for (int j = 2; j <= 8; j=j+N)
       {
          y=j;
-         printf("oui");
+         
          
             while (x!=i-2&&fin==false)
             {
@@ -563,6 +560,7 @@ void paireNue(tGrille grille){
                                        
                                        grille[u][p].candidats[paire1[0]]=false;
                                        grille[u][p].candidats[paire1[1]]=false;
+                                       fin=false;
                                     }
                                  }
                               }

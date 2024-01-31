@@ -1,0 +1,15 @@
+java.lang fournit les classes principale de java
+
+java.io regroupement de class qui envoi des donné en entré sortie 
+
+Systeme permi d'ecrire sur l'entré sortie majucsule car la class
+
+out pour signifir en sortie
+
+une autre class
+
+
+elle scan du text
+
+in est une variable de la classe Systeme
+
