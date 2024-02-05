@@ -26,9 +26,12 @@ class Graphe(object):
 
     def all_aretes(self):
         """ retourne toutes les aretes du graphe """
-        for i in self._graphe_dict()
-            return i
-www
+        a = list(self)
+        
+        for i in range(5):
+            a[i]=self.aretes(a[i])
+            
+        return(a)
 
     def add_sommet(self, sommet):
         """ Si le "sommet" n'set pas déjà présent
@@ -36,18 +39,36 @@ www
 	une clé "sommet" avec une liste vide pour valeur. 
 	Sinon on ne fait rien.
         """
+        a=list(self)
+        fin = int(0)
+        for i in range(5):
+            if sommet == a[i]:
+                fin =1
+        if fin==0:
+            self._graphe_dict[sommet]={}
 
     def add_arete(self, arete):
         """ l'arete est de  type set, tuple ou list;
             Entre deux sommets il peut y avoir plus
 	    d'une arete (multi-graphe)
         """
+        dep,arr =arete
+        if dep in self.all_sommets():
+            if arete not in self.all_aretes():
+                self._graphe_dict[dep].append(arr)
+
 
     def __list_aretes(self):
         """ Methode privée pour récupérer les aretes. 
 	    Une arete est un ensemble (set)
-            avec un (boucle) ou deux sommets.
+            ave.c un (boucle) ou deux sommets.
         """
+        a = list(self)
+        
+        for i in range(5):
+            a[i]=self.aretes(a[i])
+            
+        return(a)
     
     def __iter__(self):
         self._iter_obj = iter(self._graphe_dict)
@@ -65,6 +86,19 @@ www
         for arete in self.__list_aretes():
             res += str(arete) + " "
         return res
+    def trouve_chaine(self, sommet_dep, sommet_arr, chain=None):
+        if sommet_arr == sommet_dep :
+            return chain+sommet_arr
+        elif chain ==None:
+            chain = sommet_dep
+        else:
+            chain = chain + sommet_dep
+        for i in self.all_sommets():
+            if i in self.aretes(sommet_dep) and i not in chain:
+                return self.trouve_chaine(i,sommet_arr,chain)
+
+    def trouve_tous_chemins(self, sommet_dep, sommet_arr, chem=[]):
+        self.trouve_chaine(sommet_dep,sommet_arr)
     
 g= graphe = {"A" :["C"],
 "B" : ["C", "E"],
@@ -74,4 +108,6 @@ g= graphe = {"A" :["C"],
 "F" : set()
 }
 g2=Graphe(g)
-print(g2.all_sommets())
+print(g2.trouve_chaine("A","B"))
+
+
