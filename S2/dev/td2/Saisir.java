@@ -1,10 +1,6 @@
 import java.util.Scanner;
 import java.lang.Byte;
-class test{  
-    public static void main (String[] args){ 
 
-    }
-}
 
 class Saisir{
     static private String ligne;
