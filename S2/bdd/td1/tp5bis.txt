@@ -1,0 +1,5 @@
+Affaire ( no_affaire)
+Employe (matricule_emp , nom_emp , prenom_emp)
+Competence (code_comp , libel_comp)
+possede (code_comp , matricule_emp)
+intervenir (code_comp , no_affaire , matricule_emp)

@@ -86,6 +86,7 @@ class Graphe(object):
         for arete in self.__list_aretes():
             res += str(arete) + " "
         return res
+    
     def trouve_chaine(self, sommet_dep, sommet_arr, chain=None):
         if sommet_arr == sommet_dep :
             return chain+sommet_arr
