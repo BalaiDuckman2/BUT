@@ -109,6 +109,7 @@ class Graphe(object):
                     sous_chaines = self.trouve_tous_chemins(voisin,sommet_arr,chem + [voisin])
                     for chaine in sous_chaines:
                         res.append([sommet_dep] + chaine)
+                        
             
             return res
 
@@ -116,22 +117,38 @@ class Graphe(object):
 
 class Graphe2(Graphe):
     def sommet_degre(self, sommet):
+
         """ renvoie le degre du sommet """
+        degre =len(self.aretes(sommet))
         return degre
     
     
     def trouve_sommet_isole(self):
+        isoles = []
         """ renvoie la liste des sommets isoles """
+        for i in self.all_sommets():
+            if(self.sommet_degre(i)==0):
+                isoles.append(i)
         return isoles
     
     def Delta(self):
         """ le degre maximum """
+        max=-1
+        for i in self.all_sommets():
+            if(self.sommet_degre(i)>max):
+                max = self.sommet_degre(i)
+
         return max
     
     def list_degres(self):
+        degres = []
         """ calcule tous les degres et renvoie un
         tuple de degres decroissant
         """
+        for i in self.all_sommets():
+            degres.append([str(self.sommet_degre(i))+i])
+        
+        degres.sort()
         return degres
         
         
@@ -142,6 +159,6 @@ g= graphe = {"A" :["C"],
  "E" : ["C", "B"],
 "F" : set()
 }
-g2=Graphe(g)
-print(g2.trouve_tous_chemins("A","E"))
+g2=Graphe2(g)
+print(g2.list_degres())
 

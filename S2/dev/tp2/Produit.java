@@ -2,7 +2,7 @@ import java.util.Scanner;
 
 public class Produit {
     private String reference;
-    private int date;
+    int date;
     Scanner scan = new Scanner(System.in);
 
     void afficher(){
