@@ -99,8 +99,42 @@ class Graphe(object):
                 return self.trouve_chaine(i,sommet_arr,chain)
 
     def trouve_tous_chemins(self, sommet_dep, sommet_arr, chem=[]):
-        self.trouve_chaine(sommet_dep,sommet_arr)
+        res = []
+        
+        if sommet_dep == sommet_arr:
+            return [[sommet_arr]]
+        else:
+            for voisin in self.aretes(sommet_dep):
+                if (voisin not in chem):
+                    sous_chaines = self.trouve_tous_chemins(voisin,sommet_arr,chem + [voisin])
+                    for chaine in sous_chaines:
+                        res.append([sommet_dep] + chaine)
+            
+            return res
+
+
+
+class Graphe2(Graphe):
+    def sommet_degre(self, sommet):
+        """ renvoie le degre du sommet """
+        return degre
     
+    
+    def trouve_sommet_isole(self):
+        """ renvoie la liste des sommets isoles """
+        return isoles
+    
+    def Delta(self):
+        """ le degre maximum """
+        return max
+    
+    def list_degres(self):
+        """ calcule tous les degres et renvoie un
+        tuple de degres decroissant
+        """
+        return degres
+        
+        
 g= graphe = {"A" :["C"],
 "B" : ["C", "E"],
 "C" : ["A", "B", "D", "E"],
@@ -109,6 +143,5 @@ g= graphe = {"A" :["C"],
 "F" : set()
 }
 g2=Graphe(g)
-print(g2.trouve_chaine("A","B"))
-
+print(g2.trouve_tous_chemins("A","E"))
 
