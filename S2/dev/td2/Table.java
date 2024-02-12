@@ -52,6 +52,7 @@ class Table{
             }
             
             for(int i=this.ndp; i>=0;i--){
+                
                 this.table[i+1]=this.table[i];
             }
             this.table[0]=nouveauDomino;
@@ -70,34 +71,5 @@ class Table{
         
     }
 
-    public static void main (String[] args){
-        
-        int n=28;
-        int gauche;
-        int droite;
-        Table jeux = new Table(n);
-        jeux.initTable();
-        jeux.affTable(); 
-        Scanner scan=new Scanner(System.in);
-        while (jeux.ndp!=n) {
-            
-            System.out.println("Gauche");
-            gauche=scan.nextInt();
-            scan.nextLine();
-            System.out.println("Droite");
-            droite=scan.nextInt();
-            scan.nextLine();
-            
-            if(jeux.recherche(gauche, droite)==-1) {
-                jeux.poserAgauche(gauche, droite);
-            }else if(jeux.recherche(gauche, droite)==1){
-                jeux.poserAdroite(gauche, droite);
-            }else{
-                System.out.println("impossible");
-            }
-            jeux.affTable(); 
-            
-        }
-        scan.close();
-    }
+
 }
