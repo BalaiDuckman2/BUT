@@ -1,0 +1,9 @@
+/**
+ * 
+ */
+/**
+ * @author racorre
+ *
+ */
+module crampter {
+}
