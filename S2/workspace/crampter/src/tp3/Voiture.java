@@ -44,6 +44,12 @@ public class Voiture {
 		System.out.println("tarifAuKm");
 		this.tarifAuKm=scan.nextFloat();
 	}
+	Voiture(String immatriculation, String modele, int nbKm, float tarifAuKm){
+		this.immatriculation=immatriculation;
+		this.modele=modele;
+		this.nbKm=nbKm;
+		this.tarifAuKm=tarifAuKm;
+	}
 	
 	public static void main(String[] args) {
 		ArrayList<Voiture> lVoi = new ArrayList<Voiture>();

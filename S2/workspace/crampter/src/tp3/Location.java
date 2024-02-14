@@ -20,7 +20,7 @@ public class Location{
 	public String toString(){
 		String fin;
 		if(this.dateRetour==null) {
-			fin="\nNuméro: "+this.numero+"\nClient: "+this.client+"\nDate de location: "+this.dateLoca+"\nDate de retour: Pas de date "+"\nkm: "+km+"\n";
+			fin="\nLocation numéro: "+this.numero+"\n\nVoiture: "+this.voiture+"\nClient: "+this.client+"\nDate de location: "+this.dateLoca+"\nDate de retour: Pas de date "+"\nkm: "+km+"\n";
 					
 		
 					
