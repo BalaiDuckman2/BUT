@@ -26,8 +26,8 @@ public class Stock {
                 
             }else{
                 while(laPile.pileVide()==false) {
-                	laPile.depiler();
                 	laPile.sommet().afficher();
+                	laPile.depiler();
  
             }
         }
@@ -50,7 +50,7 @@ public class Stock {
                 laPile.afficherStock();
                 
             }else if (choix.compareTo("s")==0) {
-                leStock.sortir(date);
+                leStock.sortir(leStock.date);
             }else if (choix.compareTo("i")==0) {
                 leStock.date++;
             }

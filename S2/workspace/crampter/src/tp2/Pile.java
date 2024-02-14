@@ -40,8 +40,8 @@ public class Pile {
     }
     void depiler(){
         int i=0;
-        if (pileVide()==true) {
-            if (pilePleine()==false) {
+        if (pileVide()==false) {
+            if (pilePleine()==true) {
                 while (this.tab[i]!=null) {
                     i++;
                 }
