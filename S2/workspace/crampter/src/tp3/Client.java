@@ -10,6 +10,22 @@ public class Client{
 	
 	Client(String nom, String domicile){
 		this.id=count++;
-		this.nom
+		this.nom=nom;
+		this.domicile=domicile;
 	}
+	
+	public String toString() {
+		String fin = "\nid: "+this.id+"\nnom: "+this.nom+"\ndomicile: "+this.domicile+"\n";
+		return fin;
+	}
+	
+	public static void main(String[] args) {
+		Client oui = new Client("az","ba");
+		System.out.println(oui);
+	}
+
+	public int getId() {
+		return id;
+	}
+	
 }

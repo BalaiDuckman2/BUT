@@ -24,7 +24,7 @@ public class Voiture {
 	
     public String toString(){
     	String fin;
-    	fin = this.immatriculation+"\n"+this.modele+"\n"+this.nbKm+"\n"+this.tarifAuKm+"\n";
+    	fin = "\nimmatriculation: "+this.immatriculation+"\nmodele: "+this.modele+"\nnbKm: "+this.nbKm+"\ntarifAuKm: "+this.tarifAuKm+"\n";
     	return fin;
     }
 
