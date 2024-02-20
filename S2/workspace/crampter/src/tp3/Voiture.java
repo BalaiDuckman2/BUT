@@ -11,15 +11,22 @@ public class Voiture {
 	}
 	
 	public String getModele() {
-		return modele;
+		return this.modele;
 	}
 	
 	public int getNbKm() {
-		return nbKm;
+		return this.nbKm;
 	}
 	
+	public void setNbKm(int nbKm) {
+		this.nbKm = nbKm;
+	}
+	
+
+
+	
 	public float getTarifAuKm() {
-		return tarifAuKm;
+		return this.tarifAuKm;
 	}
 	
     public String toString(){

@@ -56,7 +56,7 @@ public class Agence{
 		immatriculation = scan.next();
 		while(parc.get(e).getImmatriculation().compareTo(immatriculation)!=0) {
 			e++;
-			if(e>=parc.size()) {
+			if(e>=parc.size()){
 				e=0;
 				System.out.println("erreur\nimmatriculation");
 				immatriculation = scan.next();
@@ -65,5 +65,38 @@ public class Agence{
 		Date date=new Date();
 		Location location=new Location(parc.get(e), clientele.get(i), date);
 		liste.add(location);
+	}
+
+	public void enregistrerRetour(){
+		int e=0;
+		int i=0;
+		int kilometrage;
+		int distance;
+		float prix;
+		String immatriculation;
+		System.out.println("immatriculation");
+		immatriculation = scan.next();
+		while (liste.get(e).getVoiture().getImmatriculation()!=immatriculation) {
+			e++;
+			if(e>=liste.size()){
+				e=0;
+				System.out.println("erreur\nimmatriculation");
+				immatriculation = scan.next();
+			}
+		}
+		System.out.println(liste.get(e));
+		Date date=new Date();
+		liste.get(e).setDateRetour(date);
+		System.out.println("kilometrage");
+		kilometrage=scan.nextInt();
+		if(kilometrage<liste.get(e).getVoiture().getNbKm()) {
+			System.out.println("erreur\nkilometrage");
+			kilometrage=scan.nextInt();
+		}
+		distance=kilometrage-liste.get(e).getVoiture().getNbKm();
+		prix=distance*liste.get(e).getVoiture().getTarifAuKm();
+		System.out.println("prix: "+prix);
+		liste.get(e).setDateRetour(date);
+		liste.get(e).getVoiture().setNbKm(kilometrage+liste.get(e).getVoiture().getNbKm());
 	}
 }

@@ -37,6 +37,9 @@ public class Location{
 	public void setDateRetour(Date dateRetour) {
 		this.dateRetour = dateRetour;
 	}
+	public Voiture getVoiture() {
+    	return this.voiture;
+	}
 	
 	
 }
