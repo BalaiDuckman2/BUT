@@ -1,0 +1,61 @@
+1: 
+un commercial exerce une activité dans au moins une zone 
+géographique et ay plus n zone géographique.
+dans une zone géographique, il y a un seul commercial
+exerçant une activité.
+
+un client habite dans une seul zone géographique.
+dans une zoen géographique, il y a 0 ou plusieur clients
+résidents.
+
+2:
+
+    1_*   1_*
+auteur----oeuvre
+
+
+       1     0_*       
+personne------emplois
+
+       1_*     1
+sportif-----catégorie
+
+        1_*        0_*
+personne---------université
+
+3:
+
+une personne a 0 ou plusieur conjoint.
+une personne a 1 ou plusieur conjointe.
+
+une personne a 0 ou 1 conjoint.
+une personne a 0 ou plusieur conjointe.
+
+une personne a 0 ou 1 conjoint.
+une personne a 0 ou 1 conjointe.
+
+        paspere
+            0_*
+personne-----personne
+        -----
+            0_1
+        pere
+
+4:
+
+
+        sommet
+        1     3
+triangle------point
+
+
+
+        sommet
+        1     3
+triangle------point
+void peri       void getx()
+                void gety()
+                void setx()
+                void sety()
+
+
