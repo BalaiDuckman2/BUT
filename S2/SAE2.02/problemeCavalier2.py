@@ -14,12 +14,14 @@ def solve_knight_problem():
 
         # Fonction récursive pour trouver un chemin valide
         def dfs(x, y, move_count):
+            nonlocal path_count  # Variable pour compte r le nombre de chemins
             # Marquer la case actuelle avec le nombre de mouvements
             board[x][y] = move_count
 
             # Vérifier si tous les mouvements ont été effectués
             if move_count == board_size ** 2 - 1:
-                return True
+                   path_count += 1  # Incrémenter le nombre de chemins trouvés
+            return True
 
             # Parcourir tous les mouvements possibles
             for dx, dy in moves:
@@ -36,8 +38,11 @@ def solve_knight_problem():
             return False
 
         # Appeler la fonction récursive avec les coordonnées de départ
+        path_count = 0  # Initialiser le nombre de chemins à 0
         if dfs(start_x, start_y, 0):
-            # Afficher le chemin trouvé
+            # Afficher le nombre de chemins trouvés
+            messagebox.showinfo("Nombre de chemins", f"Il y a {path_count} chemins possibles.")
+            # Afficher un exemple de chemin
             for row in board:
                 print(row)
             # Afficher une boîte de dialogue avec la solution
@@ -113,8 +118,6 @@ def solve_knight_problem_gui():
     else:
         messagebox.showinfo("Solution", "Aucun chemin trouvé")
 
-
-
 # Créer des entrées pour les coordonnées de départ et la taille du plateau
 start_x_label = tk.Label(window, text="Coordonnée X de départ:")
 start_x_label.pack()
@@ -137,3 +140,4 @@ solve_button.pack()
 
 # Lancer la boucle principale de l'interface graphique
 window.mainloop()
+

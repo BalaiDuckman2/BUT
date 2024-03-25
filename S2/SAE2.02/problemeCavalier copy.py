@@ -1,10 +1,7 @@
 import tkinter as tk
 from tkinter import messagebox
 
-def solve_knight_problem():
-    # Demander à l'utilisateur de choisir la taille du plateau
-    grid_size = int(input("Choisissez la taille du plateau : "))
-
+def solve_knight_problem(grid_size):
     # Créer une grille vide
     grid = [[0 for _ in range(grid_size)] for _ in range(grid_size)]
 
@@ -17,17 +14,20 @@ def solve_knight_problem():
     # Variable de comptage des chemins possibles
     count = 0
 
+    # Liste pour stocker un chemin possible
+    path = []
+
     # Fonction récursive pour trouver tous les chemins possibles
     def find_paths(row, col, move_number):
-        nonlocal count
+        nonlocal count, path
 
         # Marquer la case actuelle avec le numéro de mouvement
         grid[row][col] = move_number
+        path.append((row, col))  # Ajouter la case au chemin
 
         # Si tous les mouvements ont été effectués, incrémenter le compteur
         if move_number == grid_size * grid_size:
             count += 1
-            display_board()
         else:
             # Essayer tous les mouvements possibles
             for move in moves:
@@ -40,32 +40,38 @@ def solve_knight_problem():
 
         # Réinitialiser la case actuelle
         grid[row][col] = 0
+        path.pop()  # Retirer la case du chemin
 
     # Vérifier si un mouvement est valide
     def is_valid_move(row, col, grid):
         return 0 <= row < grid_size and 0 <= col < grid_size and grid[row][col] == 0
 
-    # Afficher le plateau de jeu
-    def display_board():
+    # Fonction pour afficher la grille dans une fenêtre tkinter
+    def draw_grid(grid):
         window = tk.Tk()
-        window.title("Problème du cavalier")
-        window.geometry("400x400")
-
+        window.title("Grille du problème du cavalier")
         for i in range(grid_size):
             for j in range(grid_size):
                 label = tk.Label(window, text=str(grid[i][j]), width=4, height=2, relief="solid")
                 label.grid(row=i, column=j)
-
-        messagebox.showinfo("Nombre de chemins possibles", "Nombre de chemins possibles: " + str(count))
-
         window.mainloop()
 
     # Demander à l'utilisateur de choisir la ligne et la colonne
     row = int(input("Choisissez la ligne : "))
     col = int(input("Choisissez la colonne : "))
-
+    
     # Appeler la fonction récursive pour trouver tous les chemins possibles
     find_paths(row, col, 1)
 
-# Appeler la fonction pour résoudre le problème du cavalier
-solve_knight_problem()
+    # Retourner le nombre de chemins possibles
+    
+    return count
+    
+
+# Demander à l'utilisateur de choisir la taille de la grille
+grid_size = int(input("Choisissez la taille de la grille : "))
+
+# Exemple d'utilisation avec la taille de grille choisie
+num_paths = solve_knight_problem(grid_size)
+print("Nombre de chemins possibles:", num_paths)
+
